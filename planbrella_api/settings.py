@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure-qpf72xw%o)jkyjnls)=fet!6o+#aj@nn0pj@g5rly14t-9_7^=
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['.gitpod.io']
+
+# CSRF settings
+CSRF_TRUSTED_ORIGINS = ['https://*.gitpod.io']
 
 
 # Application definition
@@ -39,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     
+    'profiles',
     'tasks',
 ]
 
