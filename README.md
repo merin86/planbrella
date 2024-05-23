@@ -26,6 +26,12 @@ Text...
 
 ## Testing
 
+### Automated Testing
+
+- Back-End, views (Tasks)...
+
+The automated testing is not comprehensive, but it gives an indication of the developer's ability to create automated tests.
+
 ## Bugs
 
 ---
@@ -47,6 +53,21 @@ Text...
 # Overall
 
 ## Technologies Used
+
+### Programming Languages
+
+-   [HTML5](https://en.wikipedia.org/wiki/HTML5)
+-   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
+-   [Python](https://www.python.org/)
+
+### Frameworks, Libraries and Programs Used
+
+-   [GitPod](https://www.gitpod.io/):
+The IDE where the site was built.
+-   [GitHub](https://github.com/):
+To host and store the data for the site.
+-   [Django REST Framework](https://www.django-rest-framework.org/):
+Framework used to create the Back-End for the web page.
 
 ### Packages
 
@@ -92,6 +113,8 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 - The following web page has been used as a learning tool and source of inspiration to create own codes for the website: [W3Schools](https://www.w3schools.com/)
 
 - This README.md has been used as a template to create this README: [pro5 - README.md](https://github.com/gStarhigh/pro5/blob/main/README.md)
+
+- With the help of [MDN Web Docs](https://developer.mozilla.org/en-US/), the automated tests for the project were created.
 
 ## Media
 
