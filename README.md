@@ -75,6 +75,8 @@ Most important packages:
 
 - django
 - djangorestframework
+- django-allauth
+- dj-rest-auth
 - 
 
 <details>
@@ -115,6 +117,8 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 - This README.md has been used as a template to create this README: [pro5 - README.md](https://github.com/gStarhigh/pro5/blob/main/README.md)
 
 - With the help of [MDN Web Docs](https://developer.mozilla.org/en-US/), the automated tests for the project were created.
+
+- These two web pages were used when installing and configuring django-allauth and dj-rest-auth: [allauth](https://docs.allauth.org/en/latest/installation/quickstart.html) & [rest-auth](https://dj-rest-auth.readthedocs.io/en/latest/installation.html)
 
 ## Media
 

@@ -19,8 +19,11 @@ from django.urls import include, path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('comments/', include('comments.urls')),
-    path('tasks/', include('tasks.urls')),
+    path('accounts/', include('allauth.urls')),
     path('api-auth/', include('rest_framework.urls')),
+    path('dj-rest-auth/', include('dj_rest_auth.urls')),
+    path('dj-rest-auth/registration/', include('dj_rest_auth.registration.urls')),
     path('', include('profiles.urls')),
+    path('tasks/', include('tasks.urls')),
+    path('comments/', include('comments.urls')),
 ]
