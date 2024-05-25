@@ -5,13 +5,13 @@ from django.contrib.auth import get_user_model
 User = get_user_model()
 
 class CommentSerializer(serializers.ModelSerializer):
-    owner = serializers.ReadOnlyField(source='user.username')
+    owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    profile_id = serializers.ReadOnlyField(source='user.profile.id', default=None)
+    profile_id = serializers.ReadOnlyField(source='owner.profile.id', default=None)
 
     def get_is_owner(self, obj):
         request = self.context['request']
-        return obj.user == request.user
+        return obj.owner == request.user
 
     class Meta:
         model = Comment
@@ -20,3 +20,6 @@ class CommentSerializer(serializers.ModelSerializer):
             'text', 'created_at', 'updated_at'
         ]
         read_only_fields = ('created_at', 'updated_at')
+
+class CommentDetailSerializer(CommentSerializer):
+    task_id = serializers.ReadOnlyField(source='task.id')
