@@ -1,10 +1,13 @@
 from django.http import Http404
+from django.contrib.auth import get_user_model
+from rest_framework import generics, permissions, status
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from rest_framework import status
 from .models import Profile
-from .serializers import ProfileSerializer
+from .serializers import ProfileSerializer, UserSearchSerializer
 from planbrella_api.permissions import IsOwnerOrReadOnly
+
+User = get_user_model()
 
 class ProfileList(APIView):
     """
@@ -12,14 +15,13 @@ class ProfileList(APIView):
     """
     def get(self, request, format=None):
         profiles = Profile.objects.all()
-        serializer = ProfileSerializer(
-            profiles, many=True, context={'request': request}
-            )
+        serializer = ProfileSerializer(profiles, many=True, context={'request': request})
         return Response(serializer.data)
 
 class ProfileDetail(APIView):
     serializer_class = ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
+
     """
     Retrieve, update, or delete a profile instance.
     """
@@ -38,9 +40,7 @@ class ProfileDetail(APIView):
 
     def put(self, request, pk, format=None):
         profile = self.get_object(pk)
-        serializer = ProfileSerializer(
-            profile, data=request.data, context={'request': request}
-            )
+        serializer = ProfileSerializer(profile, data=request.data, context={'request': request})
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -50,3 +50,15 @@ class ProfileDetail(APIView):
         profile = self.get_object(pk)
         profile.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class UserSearchAPIView(generics.ListAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+    serializer_class = UserSearchSerializer
+    queryset = User.objects.all()
+
+    def get_queryset(self):
+        queryset = super().get_queryset()
+        username = self.request.query_params.get('username', None)
+        if username:
+            queryset = queryset.filter(username__icontains=username)
+        return queryset
