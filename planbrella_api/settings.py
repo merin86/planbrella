@@ -60,10 +60,10 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['.gitpod.io', 'planbrella.herokuapp.com']
+ALLOWED_HOSTS = ['.gitpod.io', '.herokuapp.com', '127.0.0.1', 'planbrella.herokuapp.com']
 
 # CSRF settings
-CSRF_TRUSTED_ORIGINS = ['https://*.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.gitpod.io']
 
 
 # Application definition
