@@ -34,7 +34,7 @@ REST_FRAMEWORK = {
         'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 10,
     'DATETIME_FORMAT': '%d %b %Y',
-    
+
 }
 if 'DEV' not in os.environ:
     REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] = [
@@ -48,9 +48,9 @@ JWT_AUTH_REFRESH_COOKIE = 'my-refresh-token'
 JWT_AUTH_SAMESITE = 'None'
 
 REST_AUTH_SERIALIZERS = {
-    'USER_DETAILS_SERIALIZER': 'planbrella_api.serializers.CurrentUserSerializer'
+    'USER_DETAILS_SERIALIZER':
+        'planbrella_api.serializers.CurrentUserSerializer'
 }
-
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
@@ -61,7 +61,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = 'DEV' in os.environ
 
-ALLOWED_HOSTS = ['.gitpod.io', '.herokuapp.com', '127.0.0.1', os.environ.get('ALLOWED_HOST')]
+ALLOWED_HOSTS = [
+    '.gitpod.io',
+    '.herokuapp.com',
+    '127.0.0.1',
+    os.environ.get('ALLOWED_HOST')
+]
+
 
 # CSRF settings
 CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.gitpod.io']
@@ -107,7 +113,9 @@ if 'CLIENT_ORIGIN' in os.environ:
         os.environ.get('CLIENT_ORIGIN')
     ]
 if 'CLIENT_ORIGIN_DEV' in os.environ:
-    extracted_url = re.match(r'^.+-', os.environ.get('CLIENT_ORIGIN_DEV', ''), re.IGNORECASE).group(0)
+    client_origin_dev = os.environ.get('CLIENT_ORIGIN_DEV', '')
+    match = re.match(r'^.+-', client_origin_dev, re.IGNORECASE)
+    extracted_url = match.group(0)
     CORS_ALLOWED_ORIGIN_REGEXES = [
         rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
     ]

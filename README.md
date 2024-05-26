@@ -34,6 +34,14 @@ The automated testing is not comprehensive, but it gives an indication of the de
 
 ## Bugs
 
+When I deployed to Heroku, there were errors in the code that caused only this text to appear when I opened the app via Heroku:
+
+![deployment-heroku](documentation/images/deployment-heroku.jpg)
+
+I tried various ways to fix this, but in the end had to take the help of a tutor. The error turned out to be in my root_route, api_view, which was missing permission_classes. This code solved the problem:
+
+![deployment-heroku-fixed](documentation/images/deployment-heroku-fixed.jpg)
+
 ---
 
 # Front-End
@@ -129,3 +137,5 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 ## Media
 
 ## Acknowledgment
+
+- I want to thank the tutor (Roman) who helped me fix the "bug" that caused problems when I tried to open my APIView via Heroku.

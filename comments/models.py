@@ -2,9 +2,22 @@ from django.db import models
 from django.conf import settings
 from tasks.models import Task
 
+
 class Comment(models.Model):
-    task = models.ForeignKey(Task, related_name='comments', on_delete=models.CASCADE)
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    """
+    A model for storing comments related to a task.
+    Each comment is linked to a specific task and user (owner)
+    who created the comment.
+    """
+    task = models.ForeignKey(
+        Task,
+        related_name='comments',
+        on_delete=models.CASCADE
+    )
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

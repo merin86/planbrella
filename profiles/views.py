@@ -9,15 +9,23 @@ from planbrella_api.permissions import IsOwnerOrReadOnly
 
 User = get_user_model()
 
+
 class ProfileList(APIView):
     """
-    List all profiles. Profiles are created automatically when a user is registered.
+    List all profiles. Profiles are created
+    automatically when a user is registered.
     """
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
     def get(self, request, format=None):
         profiles = Profile.objects.all()
-        serializer = ProfileSerializer(profiles, many=True, context={'request': request})
+        serializer = ProfileSerializer(
+            profiles,
+            many=True,
+            context={'request': request}
+        )
         return Response(serializer.data)
+
 
 class ProfileDetail(APIView):
     serializer_class = ProfileSerializer
@@ -41,7 +49,11 @@ class ProfileDetail(APIView):
 
     def put(self, request, pk, format=None):
         profile = self.get_object(pk)
-        serializer = ProfileSerializer(profile, data=request.data, context={'request': request})
+        serializer = ProfileSerializer(
+            profile,
+            data=request.data,
+            context={'request': request}
+        )
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
@@ -52,7 +64,13 @@ class ProfileDetail(APIView):
         profile.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class UserSearchAPIView(generics.ListAPIView):
+    """
+    API view for searching users by their username.
+    This view supports filtering the queryset by
+    username passed as a query parameter.
+    """
     permission_classes = [permissions.IsAuthenticated]
     serializer_class = UserSearchSerializer
     queryset = User.objects.all()

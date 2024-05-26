@@ -4,10 +4,18 @@ from django.contrib.auth import get_user_model
 
 User = get_user_model()
 
+
 class CommentSerializer(serializers.ModelSerializer):
+    """
+    Serializer for Comment model that handles serialization
+    and deserialization of Comment data. It also provides
+    read-only fields for owner username and profile ID.
+    """
     owner = serializers.ReadOnlyField(source='owner.username')
     is_owner = serializers.SerializerMethodField()
-    profile_id = serializers.ReadOnlyField(source='owner.profile.id', default=None)
+    profile_id = serializers.ReadOnlyField(
+        source='owner.profile.id', default=None
+    )
 
     def get_is_owner(self, obj):
         request = self.context['request']
@@ -21,5 +29,11 @@ class CommentSerializer(serializers.ModelSerializer):
         ]
         read_only_fields = ('created_at', 'updated_at')
 
+
 class CommentDetailSerializer(CommentSerializer):
+    """
+    A detailed serializer for the Comment model extending the basic
+    CommentSerializer with a specific task ID field for more
+    detailed view endpoints.
+    """
     task_id = serializers.ReadOnlyField(source='task.id')
