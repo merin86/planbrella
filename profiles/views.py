@@ -13,6 +13,7 @@ class ProfileList(APIView):
     """
     List all profiles. Profiles are created automatically when a user is registered.
     """
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
     def get(self, request, format=None):
         profiles = Profile.objects.all()
         serializer = ProfileSerializer(profiles, many=True, context={'request': request})
