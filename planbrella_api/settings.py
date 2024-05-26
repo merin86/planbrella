@@ -13,7 +13,6 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 from pathlib import Path
 import os
 import dj_database_url
-import re
 
 if os.path.exists('env.py'):
     import env
@@ -59,7 +58,7 @@ REST_AUTH_SERIALIZERS = {
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = 'DEV' in os.environ
+DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
     '.gitpod.io',
@@ -108,17 +107,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
-if 'CLIENT_ORIGIN' in os.environ:
-    CORS_ALLOWED_ORIGINS = [
-        os.environ.get('CLIENT_ORIGIN')
-    ]
-if 'CLIENT_ORIGIN_DEV' in os.environ:
-    client_origin_dev = os.environ.get('CLIENT_ORIGIN_DEV', '')
-    match = re.match(r'^.+-', client_origin_dev, re.IGNORECASE)
-    extracted_url = match.group(0)
-    CORS_ALLOWED_ORIGIN_REGEXES = [
-        rf"{extracted_url}(eu|us)\d+\w\.gitpod\.io$",
-    ]
+
+CORS_ALLOWED_ORIGINS = [
+    os.environ.get('CLIENT_ORIGIN')
+]
 
 CORS_ALLOW_CREDENTIALS = True
 
