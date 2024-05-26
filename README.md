@@ -32,6 +32,23 @@ Text...
 
 The automated testing is not comprehensive, but it gives an indication of the developer's ability to create automated tests.
 
+### Python Testing
+
+To test that the Python code meets the PEP8 standard, [CI Python Linter](https://pep8ci.herokuapp.com/) was used.
+
+Python files tested:
+
+- admin
+- models
+- serializers
+- urls
+- views
+- permissions
+- settings
+- tests
+
+Only small errors were detected, such as "too few blank lines", "line too long" and "no newline at end of file". All these have now been rectified.
+
 ## Bugs
 
 When I deployed to Heroku, there were errors in the code that caused only this text to appear when I opened the app via Heroku:
