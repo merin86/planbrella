@@ -84,6 +84,7 @@ I tried various ways to fix this, but in the end had to take the help of a tutor
 -   [HTML5](https://en.wikipedia.org/wiki/HTML5)
 -   [CSS3](https://en.wikipedia.org/wiki/Cascading_Style_Sheets)
 -   [Python](https://www.python.org/)
+-   [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
 
 ### Frameworks, Libraries and Programs Used
 
@@ -91,8 +92,14 @@ I tried various ways to fix this, but in the end had to take the help of a tutor
 The IDE where the site was built.
 -   [GitHub](https://github.com/):
 To host and store the data for the site.
+-   [Heroku](https://www.heroku.com/):
+Used to deploy the project.
+-   [ElephantSQL](https://customer.elephantsql.com/):
+Used to store PostgreSQL database.
 -   [Django REST Framework](https://www.django-rest-framework.org/):
 Framework used to create the Back-End for the web page.
+-   [React Bootstrap](https://react-bootstrap.github.io/):
+CSS framework used as a tool to style the web page.
 
 ### Packages
 
@@ -104,6 +111,7 @@ Most important packages:
 - dj-rest-auth
 - psycopg2
 - Gunicorn
+- whitenoise
 - 
 
 <details>
@@ -136,6 +144,8 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 - Various "Cheat Sheets", provided by CI, have been used in the creation of this web page.
 
 - [Django REST framework](https://www.django-rest-framework.org/) has been used frequently to create the Back-End of the web page.
+
+- [React Bootstrap](https://react-bootstrap.github.io/docs/getting-started/introduction) has been used to style the web page and apply the correct codes for this.
 
 - This previous PP5 project has been used as a source of inspiration and also as a tool, using DevTools, for various codes: [ProPlanX](https://project-5-proplanx-536622b745e3.herokuapp.com/)
 
