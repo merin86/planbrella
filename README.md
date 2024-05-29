@@ -69,6 +69,18 @@ I tried various ways to fix this, but in the end had to take the help of a tutor
 
 ## Design
 
+### Typography
+
+The website uses font-family: 'Montserrat'. A trendy and elegant style with a distinct character.
+
+-   The fonts used were imported from [Google Fonts](https://fonts.google.com/)
+
+### Logo and Favicon
+
+- [ChatGPT](https://chat.openai.com/) was used to create the logo for the webpage
+
+- This page was used to create a favicon for the webpage: [Favicon](https://favicon.io/)
+
 ## Testing
 
 ## Bugs
@@ -140,6 +152,8 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 - [Build a Todo app with Django and React](https://www.youtube.com/watch?v=sBjbty691eI&list=PLXuTq6OsqZjbCSfiLNb2f1FOs8viArjWy) has also been used as a support to create structure for various functions.
 
 #### Websites
+
+- These two websites have been used frequently to create the web page [Create React App](https://create-react-app.dev/) & [React](https://react.dev/)
 
 - Various "Cheat Sheets", provided by CI, have been used in the creation of this web page.
 
