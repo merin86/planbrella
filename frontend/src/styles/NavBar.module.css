@@ -1,6 +1,7 @@
 .NavBar {
     background-color: lightblue;
     border: 1px solid #09090c;
+    height: 120px;
 }
 
 .NavLink {
