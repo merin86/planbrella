@@ -1,18 +1,51 @@
 .formContainer {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    max-width: 400px;
-    margin: 20px auto;
-  }
-  
-  .divider {
-    margin: 20px 0;
-    text-align: center;
-  }
-  
-  .link {
-    color: blue;
-    cursor: pointer;
-  }
-  
+  border: 1px solid #ccc;
+  padding: 20px;
+  border-radius: 5px;
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.header {
+  text-align: center;
+  margin: 20px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.input {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.submitButton {
+  color: black;
+  background-color: lightblue;
+  border-color: lightblue;
+  margin-top: 20px;
+  border: 1px solid black;
+}
+
+.submitButton:hover {
+  background-color: #add8e6;
+  border-color: #add8e6;
+}
+
+.divider {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.signInText {
+  text-align: center;
+}
+
+.link {
+  color: blue;
+  cursor: pointer;
+}

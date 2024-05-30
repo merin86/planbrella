@@ -2,6 +2,10 @@
     background-color: lightblue;
     border: 1px solid #09090c;
     height: 120px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 1000;
 }
 
 .NavLink {
@@ -13,4 +17,15 @@
 
 .NavLink:hover {
     text-decoration: underline;
+}
+
+.NavLinkActive {
+    color: blue;
+    text-decoration: underline;
+}
+
+@media (max-width: 767px) {
+    .NavBar {
+        height: auto;
+    }
 }
