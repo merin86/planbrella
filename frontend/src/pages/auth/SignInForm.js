@@ -4,21 +4,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../../styles/SignInUpForm.module.css';
 
-function SignUpForm() {
-  const [signUpData, setSignUpData] = useState({
+function SignInForm() {
+  const [signInData, setSignInData] = useState({
     username: '',
-    password1: '',
-    password2: '',
+    password: '',
   });
-  const { username, password1, password2 } = signUpData;
+  const { username, password } = signInData;
 
   const [errors, setErrors] = useState({});
 
   const navigate = useNavigate();
 
   const handleChange = (event) => {
-    setSignUpData({
-      ...signUpData,
+    setSignInData({
+      ...signInData,
       [event.target.name]: event.target.value,
     });
   };
@@ -26,8 +25,8 @@ function SignUpForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      await axios.post('/dj-rest-auth/registration/', signUpData);
-      navigate('/sign-in');
+      await axios.post('/dj-rest-auth/login/', signInData);
+      navigate('/');
     } catch (err) {
       setErrors(err.response?.data);
     }
@@ -35,7 +34,7 @@ function SignUpForm() {
 
   return (
     <div>
-      <h2 className={styles.header}>Sign Up</h2>
+      <h2 className={styles.header}>Sign In</h2>
       <Container className={styles.formContainer}>
         <Form onSubmit={handleSubmit}>
           <Form.Group controlId="username">
@@ -55,35 +54,18 @@ function SignUpForm() {
             </Alert>
           ))}
 
-          <Form.Group controlId="password1" className="mt-3">
+          <Form.Group controlId="password" className="mt-3">
             <Form.Label className="d-none">Password</Form.Label>
             <Form.Control
               type="password"
               placeholder="Enter password"
-              name="password1"
-              value={password1}
+              name="password"
+              value={password}
               onChange={handleChange}
               className={styles.input}
             />
           </Form.Group>
-          {errors.password1?.map((message, idx) => (
-            <Alert variant="warning" key={idx}>
-              {message}
-            </Alert>
-          ))}
-
-          <Form.Group controlId="password2" className="mt-3">
-            <Form.Label className="d-none">Confirm Password</Form.Label>
-            <Form.Control
-              type="password"
-              placeholder="Confirm password"
-              name="password2"
-              value={password2}
-              onChange={handleChange}
-              className={styles.input}
-            />
-          </Form.Group>
-          {errors.password2?.map((message, idx) => (
+          {errors.password?.map((message, idx) => (
             <Alert variant="warning" key={idx}>
               {message}
             </Alert>
@@ -96,16 +78,16 @@ function SignUpForm() {
           ))}
 
           <Button variant="primary" type="submit" className={styles.submitButton}>
-            Sign Up
+            Sign In
           </Button>
         </Form>
 
         <div className={styles.divider}>or</div>
 
-        <p className={styles.signInText}>
-          Already have an account?{' '}
-          <Link to="/sign-in" className={styles.link}>
-            Sign in here!
+        <p className={styles.signUpText}>
+          Don't have an account?{' '}
+          <Link to="/sign-up" className={styles.link}>
+            Sign up here!
           </Link>
         </p>
       </Container>
@@ -113,4 +95,4 @@ function SignUpForm() {
   );
 }
 
-export default SignUpForm;
+export default SignInForm;
