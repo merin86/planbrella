@@ -70,7 +70,7 @@ ALLOWED_HOSTS = [
 
 
 # CSRF settings
-CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.gitpod.io']
+CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.gitpod.io', 'http://localhost:8000']
 
 
 # Application definition
@@ -107,10 +107,10 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
 ]
 
 CORS_ALLOWED_ORIGINS = [
+    'https://8080-merin86-planbrella-s4dit6rom3l.ws-eu114.gitpod.io',
     os.environ.get('CLIENT_ORIGIN')
 ]
 

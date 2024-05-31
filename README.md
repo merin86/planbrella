@@ -147,7 +147,7 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 
 #### Tutorials
 
-- The two walkthroughs "Django REST Framework" and "Moments" from [Code Institute](https://codeinstitute.net/) has been used as pillars to create the structure.
+- The two walkthroughs "Django REST Framework" and "Moments" from [Code Institute](https://codeinstitute.net/) has been used as pillars to create the structure. Some parts have been copied from these tutorials, such as the logic for "SignUp" and "SignIn".
 
 - [Build a Todo app with Django and React](https://www.youtube.com/watch?v=sBjbty691eI&list=PLXuTq6OsqZjbCSfiLNb2f1FOs8viArjWy) has also been used as a support to create structure for various functions.
 

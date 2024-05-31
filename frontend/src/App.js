@@ -6,6 +6,7 @@ import Home from './components/Home';
 import SignInForm from './pages/auth/SignInForm';
 import SignUpForm from './pages/auth/SignUpForm';
 import styles from "./App.module.css";
+import "./api/axiosDefaults";
 
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);

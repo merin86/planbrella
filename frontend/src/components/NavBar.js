@@ -3,9 +3,12 @@ import { Navbar, Container, Nav } from "react-bootstrap";
 import { NavLink, Link } from "react-router-dom";
 import logo from "../assets/logo.jpg";
 import styles from "../styles/NavBar.module.css";
+import { useCurrentUser } from "../contexts/CurrentUserContext";
 
 function NavBar({ onToggle }) {
   const [expanded, setExpanded] = useState(false);
+  const currentUser = useCurrentUser();
+  console.log("Current User:", currentUser);
 
   const handleToggle = () => {
     setExpanded(!expanded);
@@ -24,41 +27,23 @@ function NavBar({ onToggle }) {
           <img src={logo} alt="logo" height="80" width="80" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" onClick={handleToggle} />
-        <Navbar.Collapse
-          id="basic-navbar-nav"
-          className="justify-content-center"
-        >
-          <Nav
-            className={`mx-auto text-center d-flex align-items-center ${styles.NavLinks}`}
-          >
-            <Nav.Link
-              as={NavLink}
-              to="/"
-              end
-              className={styles.NavLink}
-              activeClassName={styles.NavLinkActive}
-              onClick={handleClose}
-            >
+        <Navbar.Collapse id="basic-navbar-nav" className="justify-content-center">
+          <Nav className={`mx-auto text-center d-flex align-items-center ${styles.NavLinks}`}>
+            <NavLink to="/" end className={({ isActive }) => isActive ? styles.NavLinkActive : styles.NavLink} onClick={handleClose}>
               Home
-            </Nav.Link>
-            <Nav.Link
-              as={NavLink}
-              to="/sign-in"
-              className={styles.NavLink}
-              activeClassName={styles.NavLinkActive}
-              onClick={handleClose}
-            >
-              Sign in
-            </Nav.Link>
-            <Nav.Link
-              as={NavLink}
-              to="/sign-up"
-              className={styles.NavLink}
-              activeClassName={styles.NavLinkActive}
-              onClick={handleClose}
-            >
-              Sign up
-            </Nav.Link>
+            </NavLink>
+            {currentUser ? (
+              <span className={styles.NavLink}>{currentUser.username}</span>
+            ) : (
+              <>
+                <NavLink to="/sign-in" className={({ isActive }) => isActive ? styles.NavLinkActive : styles.NavLink} onClick={handleClose}>
+                  Sign in
+                </NavLink>
+                <NavLink to="/sign-up" className={({ isActive }) => isActive ? styles.NavLinkActive : styles.NavLink} onClick={handleClose}>
+                  Sign up
+                </NavLink>
+              </>
+            )}
           </Nav>
         </Navbar.Collapse>
       </Container>
