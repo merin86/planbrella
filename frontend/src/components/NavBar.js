@@ -27,8 +27,8 @@ const NavBar = ({ onToggle }) => {
       await axios.post("/dj-rest-auth/logout/");
       localStorage.removeItem('token');
       setCurrentUser(null);
-      handleClose(); // Close the menu when signing out
-      navigate("/"); // Redirect to home after signing out
+      handleClose();
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
