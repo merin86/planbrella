@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import classNames from "classnames";
 import NavBar from "./components/NavBar";
-import Home from "./components/Home";
+import Home from "./pages/home/Home";
 import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
 import Footer from "./components/Footer";
