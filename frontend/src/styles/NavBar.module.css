@@ -17,6 +17,7 @@
     padding: 10px;
     margin: 0;
     display: inline-block;
+    cursor: pointer;
 }
 
 .NavLink:hover {
@@ -31,6 +32,20 @@
     padding: 10px;
     margin: 0;
     display: inline-block;
+}
+
+.NavText {
+    color: rgb(241, 40, 40);
+    margin: 0 15px;
+    text-decoration: none;
+    font-size: 1.2rem;
+    padding: 10px;
+    margin: 0;
+    display: inline-block;
+}
+
+.BrandContainer {
+    margin-right: auto;
 }
 
 @media (max-width: 767px) {

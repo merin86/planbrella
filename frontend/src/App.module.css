@@ -1,5 +1,6 @@
 .App {
   font-family: 'Montserrat', sans-serif;
+  transition: margin-top 0.3s ease;
 }
 
 * {
@@ -11,5 +12,5 @@
 }
 
 .contentShift {
-  padding-top: 120px;
+  padding-top: 140px;
 }
