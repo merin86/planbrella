@@ -17,11 +17,26 @@
   box-sizing: border-box;
 }
 
-.HeaderRow, .TaskItem {
+.ScrollableContent {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 100%;
+}
+
+.HeaderRow {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 2px solid #000;  /* Increased thickness and changed color to black */
+  border-bottom: 2px solid #000;
+  padding: 10px 0;
+  font-weight: bold;
+}
+
+.TaskItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #000;
   padding: 10px 0;
 }
 
@@ -30,26 +45,52 @@
   text-align: center;
 }
 
-.HeaderRow > div {
-  font-weight: bold;
-}
-
 .CreateButton {
   margin-top: 20px;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .CreateButton .btn {
-  text-decoration: none; /* Ensure no underline */
+  text-decoration: none;
 }
 
 .CreateButton .btn:hover {
-  text-decoration: none; /* Remove underline on hover */
+  text-decoration: none;
 }
 
 @media (max-width: 767px) {
+  .Container {
+    padding: 0;
+  }
+
   .TextBox {
+    overflow-x: auto;
     max-width: 100%;
+    padding: 10px;
+  }
+
+  .HeaderRow, .TaskItem {
+    min-width: 600px;
+    flex-wrap: wrap;
+  }
+
+  .HeaderRow div, .TaskItem div {
+    font-size: 0.8rem;
+    flex: 0 0 20%;
+    text-align: center;
+  }
+
+  .HeaderRow div {
+    white-space: normal;
+  }
+
+  .TaskItem div {
+    white-space: normal;
+  }
+
+  .TaskButton {
+    font-size: 0.8rem;
   }
 }
