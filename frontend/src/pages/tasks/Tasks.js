@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/Tasks.module.css';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -13,37 +12,47 @@ const Tasks = () => {
         const { data } = await axios.get('/tasks/');
         setTasks(data);
       } catch (err) {
-        console.error(err);
+        console.log(err);
       }
     };
 
     fetchTasks();
   }, []);
 
-  const handleCreateTask = () => {
-    navigate('/create-task');
-  };
-
   return (
     <div className={styles.Container}>
       <div className={styles.TextBox}>
-        <h2>Your Tasks</h2>
+        <div className={styles.HeaderRow}>
+          <div>Title</div>
+          <div>Due Date</div>
+          <div>View Task</div>
+          <div>Edit Task</div>
+          <div>Delete Task</div>
+        </div>
         {tasks.length > 0 ? (
-          <ul className={styles.TaskList}>
-            {tasks.map((task) => (
-              <li key={task.id} className={styles.TaskItem}>
-                <h3>{task.title}</h3>
-                <p>{task.description}</p>
-                <p>Due: {new Date(task.due_date).toLocaleDateString()}</p>
-              </li>
-            ))}
-          </ul>
+          tasks.map((task) => (
+            <div key={task.id} className={styles.TaskItem}>
+              <div>{task.title}</div>
+              <div>{task.due_date}</div>
+              <div>
+                <Link to={`/tasks/${task.id}`} className="btn btn-primary">View</Link>
+              </div>
+              <div>
+                <Link to={`/tasks/${task.id}/edit`} className="btn btn-warning">Edit</Link>
+              </div>
+              <div>
+                <button className="btn btn-danger">Delete</button>
+              </div>
+            </div>
+          ))
         ) : (
           <p>No tasks available.</p>
         )}
-        <button className={styles.Button} onClick={handleCreateTask}>
-          Create Task
-        </button>
+        <div className={styles.CreateButton}>
+          <NavLink to="/create-task" className="btn btn-success">
+            Create Task
+          </NavLink>
+        </div>
       </div>
     </div>
   );
