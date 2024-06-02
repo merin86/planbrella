@@ -6,6 +6,7 @@ import Home from "./pages/home/Home";
 import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
 import Tasks from "./pages/tasks/Tasks";
+import TaskCreateForm from "./pages/tasks/TaskCreateForm";
 import Footer from "./components/Footer";
 import styles from "./App.module.css";
 import useMenuState from "./hooks/useMenuState";
@@ -25,6 +26,7 @@ function App() {
           <Route path="/sign-in" element={<SignInForm />} />
           <Route path="/sign-up" element={<SignUpForm />} />
           <Route path="/tasks" element={<Tasks />} />
+          <Route path="/create-task" element={<TaskCreateForm />} />
           <Route path="*" element={<p>Page not found!</p>} />
         </Routes>
       </div>

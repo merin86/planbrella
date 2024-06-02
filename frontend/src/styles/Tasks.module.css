@@ -7,8 +7,8 @@
     box-sizing: border-box;
   }
   
-  .TasksBox {
-    width: 60%;
+  .TextBox {
+    width: 50%;
     background-color: lightblue;
     border: 10px solid rgba(55, 130, 255, 255);
     box-shadow: 0 0 0 1px #000, 0 0 0 1px inset #000;
@@ -25,10 +25,51 @@
   .Task h3 {
     margin: 0;
   }
+
+  .TaskList {
+    list-style-type: none;
+    padding: 0;
+  }
+
+  .TaskItem {
+    margin-bottom: 10px;
+  }
+
+  .Button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: rgba(55, 130, 255, 255);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .Button:hover {
+    background-color: rgba(55, 130, 255, 0.8);
+  }
+  
+  .Form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .FormGroup {
+    margin-bottom: 10px;
+  }
+  
+  .Input,
+  .Textarea {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
   
   @media (max-width: 767px) {
-    .TasksBox {
+    .TextBox {
       width: 100%;
     }
   }
-  

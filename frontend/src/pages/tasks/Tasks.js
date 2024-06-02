@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import TaskCreateForm from './TaskCreateForm';
+import { useNavigate } from 'react-router-dom';
 import styles from '../../styles/Tasks.module.css';
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -19,26 +20,30 @@ const Tasks = () => {
     fetchTasks();
   }, []);
 
-  const handleTaskCreated = (newTask) => {
-    setTasks((prevTasks) => [newTask, ...prevTasks]);
+  const handleCreateTask = () => {
+    navigate('/create-task');
   };
 
   return (
     <div className={styles.Container}>
-      <div className={styles.TasksBox}>
-        <h2>Tasks</h2>
-        <TaskCreateForm onTaskCreated={handleTaskCreated} />
+      <div className={styles.TextBox}>
+        <h2>Your Tasks</h2>
         {tasks.length > 0 ? (
-          tasks.map((task) => (
-            <div key={task.id} className={styles.Task}>
-              <h3>{task.title}</h3>
-              <p>{task.description}</p>
-              <p>Due Date: {new Date(task.due_date).toLocaleDateString()}</p>
-            </div>
-          ))
+          <ul className={styles.TaskList}>
+            {tasks.map((task) => (
+              <li key={task.id} className={styles.TaskItem}>
+                <h3>{task.title}</h3>
+                <p>{task.description}</p>
+                <p>Due: {new Date(task.due_date).toLocaleDateString()}</p>
+              </li>
+            ))}
+          </ul>
         ) : (
           <p>No tasks available.</p>
         )}
+        <button className={styles.Button} onClick={handleCreateTask}>
+          Create Task
+        </button>
       </div>
     </div>
   );
