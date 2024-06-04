@@ -16,7 +16,6 @@ const TaskCreateForm = () => {
         title,
         description,
         due_date: new Date(dueDate).toISOString(),
-        state: 'open',
       };
       await axios.post('/tasks/', newTask, {
         headers: {
@@ -75,3 +74,4 @@ const TaskCreateForm = () => {
 };
 
 export default TaskCreateForm;
+
