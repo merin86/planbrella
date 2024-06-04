@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
+import { FaCheck } from 'react-icons/fa';
 import styles from "../../styles/Tasks.module.css";
 
 const Tasks = () => {
@@ -35,7 +36,9 @@ const Tasks = () => {
           {tasks.length > 0 ? (
             tasks.map((task) => (
               <div key={task.id} className={styles.TaskItem}>
-                <div>{task.title}</div>
+                <div>
+                  {task.title} {task.state === 'done' && <FaCheck />}
+                </div>
                 <div>{task.due_date}</div>
                 <div>
                   <Link
