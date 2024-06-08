@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../styles/Tasks.module.css';
+import styles from '../../styles/TaskCreateForm.module.css'; // Uppdaterad import
 
 const TaskCreateForm = () => {
   const [title, setTitle] = useState('');
@@ -64,9 +64,11 @@ const TaskCreateForm = () => {
               className={styles.Input}
             />
           </div>
-          <button type="submit" className={styles.Button}>
-            Create Task
-          </button>
+          <div className={styles.ButtonGroup}>
+            <button type="submit" className={`${styles.Button} btn btn-success`}>
+              Create Task
+            </button>
+          </div>
         </form>
       </div>
     </div>

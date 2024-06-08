@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import styles from '../../styles/TaskEdit.module.css';
+import styles from '../../styles/TaskEdit.module.css'; // Uppdaterad import
 
 const TaskEdit = () => {
   const { id } = useParams();
@@ -16,16 +16,12 @@ const TaskEdit = () => {
         const { data } = await axios.get(`/tasks/${id}/`);
         setTitle(data.title);
         setDescription(data.description);
-        
-        // Justera datumet med +1 dag
-        const date = new Date(data.due_date);
-        date.setDate(date.getDate() + 1);
-        setDueDate(date.toISOString().split('T')[0]); // Formatera datumet till YYYY-MM-DD
+        setDueDate(data.due_date.split('T')[0]); // Anpassa till rätt format
       } catch (err) {
         console.error("Error fetching task:", err);
       }
     };
-
+  
     fetchTask();
   }, [id]);
 
@@ -39,7 +35,7 @@ const TaskEdit = () => {
       const updatedTask = {
         title,
         description,
-        due_date: new Date(dueDate).toISOString(), // Se till att datumet skickas i rätt format
+        due_date: new Date(dueDate).toISOString(),
       };
       await axios.put(`/tasks/${id}/`, updatedTask);
       navigate('/tasks');
@@ -84,12 +80,14 @@ const TaskEdit = () => {
               className={styles.Input}
             />
           </div>
-          <button type="submit" className={styles.Button}>
-            Save
-          </button>
-          <button type="button" onClick={handleCancel} className={styles.Button}>
-            Cancel
-          </button>
+          <div className={styles.ButtonGroup}>
+            <button type="submit" className={`${styles.Button} btn btn-primary`}>
+              Save
+            </button>
+            <button type="button" onClick={handleCancel} className={`${styles.Button} btn btn-secondary`}>
+              Cancel
+            </button>
+          </div>
         </form>
       </div>
     </div>

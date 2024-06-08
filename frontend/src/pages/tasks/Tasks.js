@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 import { FaCheck } from 'react-icons/fa';
-import { Modal, Button } from 'react-bootstrap'; // Lägg till dessa importeringar
+import { Modal, Button } from 'react-bootstrap';
 import styles from "../../styles/Tasks.module.css";
 
 const Tasks = () => {
@@ -100,7 +100,6 @@ const Tasks = () => {
         </div>
       </div>
 
-      {/* Modal för bekräftelse */}
       <Modal show={showModal} onHide={closeModal}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
