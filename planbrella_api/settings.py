@@ -110,7 +110,7 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOWED_ORIGINS = [
-    'https://8080-merin86-planbrella-s4dit6rom3l.ws-eu114.gitpod.io',
+    'https://8080-merin86-planbrella-ncxle2zpv05.ws-eu114.gitpod.io',
     os.environ.get('CLIENT_ORIGIN')
 ]
 

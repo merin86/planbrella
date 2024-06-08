@@ -2,10 +2,13 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 import { FaCheck } from 'react-icons/fa';
+import { Modal, Button } from 'react-bootstrap'; // Lägg till dessa importeringar
 import styles from "../../styles/Tasks.module.css";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [taskToDelete, setTaskToDelete] = useState(null);
 
   useEffect(() => {
     const fetchTasks = async () => {
@@ -21,6 +24,26 @@ const Tasks = () => {
     };
     fetchTasks();
   }, []);
+
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/tasks/${taskToDelete.id}/`);
+      setTasks(tasks.filter(task => task.id !== taskToDelete.id));
+      setShowModal(false);
+    } catch (err) {
+      console.error('Error deleting task:', err);
+    }
+  };
+
+  const openModal = (task) => {
+    setTaskToDelete(task);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setTaskToDelete(null);
+  };
 
   return (
     <div className={styles.Container}>
@@ -57,7 +80,10 @@ const Tasks = () => {
                   </Link>
                 </div>
                 <div>
-                  <button className={`btn btn-danger ${styles.TaskButton}`}>
+                  <button
+                    className={`btn btn-danger ${styles.TaskButton}`}
+                    onClick={() => openModal(task)}
+                  >
                     Delete
                   </button>
                 </div>
@@ -73,6 +99,24 @@ const Tasks = () => {
           </NavLink>
         </div>
       </div>
+
+      {/* Modal för bekräftelse */}
+      <Modal show={showModal} onHide={closeModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this task? Removing a task is permanent.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

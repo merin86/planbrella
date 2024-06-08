@@ -9,7 +9,8 @@ from planbrella_api.permissions import IsOwnerOrReadOnly
 
 class TaskList(APIView):
     serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated]
+
     """
     List all tasks, or create a new task.
     """
@@ -18,7 +19,7 @@ class TaskList(APIView):
         Handles GET requests to retrieve all tasks.
         Returns serialized task data.
         """
-        tasks = Task.objects.all()
+        tasks = Task.objects.filter(owner=request.user)
         serializer = TaskSerializer(
             tasks,
             many=True,
@@ -44,7 +45,8 @@ class TaskList(APIView):
 
 class TaskDetail(APIView):
     serializer_class = TaskSerializer
-    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    permission_classes = [permissions.IsAuthenticated, IsOwnerOrReadOnly]
+
     """
     Retrieve, update or delete a task instance.
     """
@@ -55,7 +57,7 @@ class TaskDetail(APIView):
         Checks object-level permissions before returning the object.
         """
         try:
-            task = Task.objects.get(pk=pk)
+            task = Task.objects.get(pk=pk, owner=self.request.user)
             self.check_object_permissions(self.request, task)
             return task
         except Task.DoesNotExist:
