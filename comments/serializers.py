@@ -30,6 +30,15 @@ class CommentSerializer(serializers.ModelSerializer):
         read_only_fields = ('created_at', 'updated_at')
 
 
+class CommentUpdateSerializer(serializers.ModelSerializer):
+    """
+    Serializer for updating comments.
+    """
+    class Meta:
+        model = Comment
+        fields = ['text']
+
+
 class CommentDetailSerializer(CommentSerializer):
     """
     A detailed serializer for the Comment model extending the basic
