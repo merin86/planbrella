@@ -17,6 +17,7 @@ const TaskDetail = () => {
   const [commentToDelete, setCommentToDelete] = useState(null);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [newCommentText, setNewCommentText] = useState("");
+  const [editError, setEditError] = useState("");
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -77,16 +78,29 @@ const TaskDetail = () => {
   const startEditing = (comment) => {
     setEditingCommentId(comment.id);
     setNewCommentText(comment.text);
+    setEditError("");
   };
 
   const cancelEditing = () => {
     setEditingCommentId(null);
     setNewCommentText("");
+    setEditError("");
+  };
+
+  const validateComment = (text) => {
+    return text.trim().length > 0;
   };
 
   const handleCommentUpdate = async () => {
+    if (!validateComment(newCommentText)) {
+      setEditError("Comment cannot be empty or whitespace.");
+      return;
+    }
+
     try {
-      await axios.put(`/comments/${editingCommentId}/`, { text: newCommentText });
+      await axios.put(`/comments/${editingCommentId}/`, {
+        text: newCommentText,
+      });
       setComments((prevComments) =>
         prevComments.map((comment) =>
           comment.id === editingCommentId
@@ -106,8 +120,15 @@ const TaskDetail = () => {
         <div className={styles.Title}>{task?.title}</div>
         <div className={styles.Description}>{task?.description}</div>
         <hr className={styles.Divider} />
-        <div className={styles.DueDate}>
+        <div
+          className={
+            task?.is_overdue ? `${styles.OverdueDate}` : styles.DueDate
+          }
+        >
           Due Date: {new Date(task?.due_date).toLocaleDateString()}
+          {task?.is_overdue && (
+            <span className={styles.OverdueText}>Overdue</span>
+          )}
         </div>
         <div className={styles.ButtonsContainer}>
           <button
@@ -132,7 +153,11 @@ const TaskDetail = () => {
           next={fetchComments}
           hasMore={hasMore}
           loader={<h4>Loading...</h4>}
-          endMessage={<p style={{ textAlign: "center" }}><b>No more comments</b></p>}
+          endMessage={
+            <p style={{ textAlign: "center" }}>
+              <b>No more comments</b>
+            </p>
+          }
         >
           {comments.map((comment) => (
             <div key={comment.id} className={styles.Comment}>
@@ -145,16 +170,14 @@ const TaskDetail = () => {
                     onChange={(e) => setNewCommentText(e.target.value)}
                     className="form-control"
                   />
+                  {editError && <div className="text-danger">{editError}</div>}
                   <button
                     className="btn btn-primary"
                     onClick={handleCommentUpdate}
                   >
                     Save
                   </button>
-                  <button
-                    className="btn btn-secondary"
-                    onClick={cancelEditing}
-                  >
+                  <button className="btn btn-secondary" onClick={cancelEditing}>
                     Cancel
                   </button>
                 </div>
@@ -190,7 +213,8 @@ const TaskDetail = () => {
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete this comment? Removing a comment is permanent.
+          Are you sure you want to delete this comment? Removing a comment is
+          permanent.
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={closeDeleteModal}>

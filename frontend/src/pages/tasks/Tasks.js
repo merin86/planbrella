@@ -62,7 +62,9 @@ const Tasks = () => {
                 <div>
                   {task.title} {task.state === 'done' && <FaCheck />}
                 </div>
-                <div>{task.due_date}</div>
+                <div className={task.is_overdue ? `${styles.OverdueDate}` : ''}>
+                  {new Date(task.due_date).toLocaleDateString()} {task.is_overdue && <span className={styles.OverdueText}>Overdue</span>}
+                </div>
                 <div>
                   <Link
                     to={`/tasks/${task.id}`}

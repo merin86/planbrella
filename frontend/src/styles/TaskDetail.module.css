@@ -86,14 +86,24 @@
     margin-bottom: 10px;
     padding: 5px;
     font-size: 14px;
-  }
-  
-  .CommentButtons {
+}
+
+.CommentButtons {
     display: flex;
     justify-content: flex-end;
     gap: 5px;
-  }
-  
+}
+
+.OverdueDate {
+    color: red;
+    font-style: italic;
+}
+
+.OverdueText {
+    color: red;
+    margin-left: 10px;
+}
+
 
 @media (max-width: 767px) {
     .Container {

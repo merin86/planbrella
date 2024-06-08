@@ -40,7 +40,8 @@
   padding: 10px 0;
 }
 
-.HeaderRow > div, .TaskItem > div {
+.HeaderRow>div,
+.TaskItem>div {
   flex: 1;
   text-align: center;
 }
@@ -65,6 +66,16 @@
   color: green;
 }
 
+.OverdueDate {
+  color: red;
+  font-style: italic;
+}
+
+.OverdueText {
+  color: red;
+  margin-left: 10px;
+}
+
 @media (max-width: 767px) {
   .Container {
     padding: 0;
@@ -76,12 +87,14 @@
     padding: 10px;
   }
 
-  .HeaderRow, .TaskItem {
+  .HeaderRow,
+  .TaskItem {
     min-width: 600px;
     flex-wrap: wrap;
   }
 
-  .HeaderRow div, .TaskItem div {
+  .HeaderRow div,
+  .TaskItem div {
     font-size: 0.8rem;
     flex: 0 0 20%;
     text-align: center;
