@@ -7,7 +7,8 @@ import SignInForm from "./pages/auth/SignInForm";
 import SignUpForm from "./pages/auth/SignUpForm";
 import Tasks from "./pages/tasks/Tasks";
 import TaskCreateForm from "./pages/tasks/TaskCreateForm";
-import TaskDetail from "./pages/tasks/TaskDetail";  // Lägg till denna import
+import TaskDetail from "./pages/tasks/TaskDetail";
+import TaskEdit from "./pages/tasks/TaskEdit";
 import Footer from "./components/Footer";
 import styles from "./App.module.css";
 import useMenuState from "./hooks/useMenuState";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/tasks" element={<Tasks />} />
           <Route path="/tasks/create" element={<TaskCreateForm />} />
           <Route path="/tasks/:id" element={<TaskDetail />} />
+          <Route path="/tasks/:id/edit" element={<TaskEdit />} />
           <Route path="*" element={<p>Page not found!</p>} />
         </Routes>
       </div>
