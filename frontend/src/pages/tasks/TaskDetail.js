@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
+import CommentCreateForm from "../comments/CommentCreateForm";
 import styles from "../../styles/TaskDetail.module.css";
 
 const TaskDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [task, setTask] = useState(null);
+  const [comments, setComments] = useState([]);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -20,7 +22,19 @@ const TaskDetail = () => {
       }
     };
 
+    const fetchComments = async () => {
+      try {
+        const { data } = await axios.get(`/comments/?task=${id}`);
+        console.log("Fetched comments:", data.results);
+        setComments(data.results);
+      } catch (err) {
+        console.error("Error fetching comments:", err);
+        setComments([]); // Set to empty array on error
+      }
+    };
+
     fetchTask();
+    fetchComments();
   }, [id]);
 
   const handleEdit = () => {
@@ -34,6 +48,15 @@ const TaskDetail = () => {
     } catch (err) {
       console.error("Error deleting task:", err);
     }
+  };
+
+  const handleCommentAdded = (newComment) => {
+    setComments((prevComments) => {
+      if (!Array.isArray(prevComments)) {
+        prevComments = [];
+      }
+      return [...prevComments, newComment];
+    });
   };
 
   return (
@@ -51,6 +74,19 @@ const TaskDetail = () => {
             Delete
           </button>
         </div>
+      </div>
+
+      <div className={styles.CommentsSection}>
+        <CommentCreateForm taskId={id} onCommentAdded={handleCommentAdded} />
+        {comments.map((comment) => (
+          <div key={comment.id} className={styles.Comment}>
+            <div className={styles.CommentOwner}>{comment.owner}</div>
+            <div className={styles.CommentText}>{comment.text}</div>
+            <div className={styles.CommentDate}>
+              {new Date(comment.created_at).toLocaleString()}
+            </div>
+          </div>
+        ))}
       </div>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>

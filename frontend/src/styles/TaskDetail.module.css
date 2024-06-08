@@ -1,7 +1,8 @@
 .Container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     height: 100%;
     padding: 20px;
     box-sizing: border-box;
@@ -45,6 +46,38 @@
 
 .Button {
     margin-right: 10px;
+}
+
+.CommentsSection {
+    margin-top: 20px;
+    width: 80%;
+    background-color: #f9f9f9;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+.Comment {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+.CommentOwner {
+    font-weight: bold;
+}
+
+.CommentText {
+    margin-top: 5px;
+}
+
+.CommentDate {
+    margin-top: 5px;
+    font-size: 0.9rem;
+    color: #666;
 }
 
 @media (max-width: 767px) {
