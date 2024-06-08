@@ -13,7 +13,10 @@ const TaskDetail = () => {
   const [comments, setComments] = useState([]);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
-  const [showModal, setShowModal] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [commentToDelete, setCommentToDelete] = useState(null);
+  const [editingCommentId, setEditingCommentId] = useState(null);
+  const [newCommentText, setNewCommentText] = useState("");
 
   useEffect(() => {
     const fetchTask = async () => {
@@ -45,17 +48,56 @@ const TaskDetail = () => {
     navigate(`/tasks/${id}/edit`);
   };
 
-  const handleDelete = async () => {
+  const handleCommentAdded = (newComment) => {
+    setComments((prevComments) => [newComment, ...prevComments]);
+  };
+
+  const openDeleteModal = (comment) => {
+    setCommentToDelete(comment);
+    setShowDeleteModal(true);
+  };
+
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
+    setCommentToDelete(null);
+  };
+
+  const handleCommentDelete = async () => {
     try {
-      await axios.delete(`/tasks/${id}/`);
-      navigate("/tasks");
+      await axios.delete(`/comments/${commentToDelete.id}/`);
+      setComments((prevComments) =>
+        prevComments.filter((comment) => comment.id !== commentToDelete.id)
+      );
+      closeDeleteModal();
     } catch (err) {
-      console.error("Error deleting task:", err);
+      console.error("Error deleting comment:", err);
     }
   };
 
-  const handleCommentAdded = (newComment) => {
-    setComments((prevComments) => [newComment, ...prevComments]);
+  const startEditing = (comment) => {
+    setEditingCommentId(comment.id);
+    setNewCommentText(comment.text);
+  };
+
+  const cancelEditing = () => {
+    setEditingCommentId(null);
+    setNewCommentText("");
+  };
+
+  const handleCommentUpdate = async () => {
+    try {
+      await axios.put(`/comments/${editingCommentId}/`, { text: newCommentText });
+      setComments((prevComments) =>
+        prevComments.map((comment) =>
+          comment.id === editingCommentId
+            ? { ...comment, text: newCommentText }
+            : comment
+        )
+      );
+      cancelEditing();
+    } catch (err) {
+      console.error("Error updating comment:", err);
+    }
   };
 
   return (
@@ -75,7 +117,7 @@ const TaskDetail = () => {
             Edit
           </button>
           <button
-            onClick={() => setShowModal(true)}
+            onClick={() => setShowDeleteModal(true)}
             className={`btn btn-danger ${styles.Button}`}
           >
             Delete
@@ -95,27 +137,66 @@ const TaskDetail = () => {
           {comments.map((comment) => (
             <div key={comment.id} className={styles.Comment}>
               <div className={styles.CommentOwner}>{comment.owner}</div>
-              <div className={styles.CommentText}>{comment.text}</div>
-              <div className={styles.CommentDate}>
-                {new Date(comment.created_at).toLocaleDateString()}
-              </div>
+              {editingCommentId === comment.id ? (
+                <div>
+                  <input
+                    type="text"
+                    value={newCommentText}
+                    onChange={(e) => setNewCommentText(e.target.value)}
+                    className="form-control"
+                  />
+                  <button
+                    className="btn btn-primary"
+                    onClick={handleCommentUpdate}
+                  >
+                    Save
+                  </button>
+                  <button
+                    className="btn btn-secondary"
+                    onClick={cancelEditing}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              ) : (
+                <>
+                  <div className={styles.CommentText}>{comment.text}</div>
+                  <div className={styles.CommentDate}>
+                    {new Date(comment.created_at).toLocaleDateString()}
+                  </div>
+                  <div className={styles.CommentButtons}>
+                    <button
+                      className="btn btn-warning"
+                      onClick={() => startEditing(comment)}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => openDeleteModal(comment)}
+                    >
+                      Delete
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           ))}
         </InfiniteScroll>
       </div>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
+      <Modal show={showDeleteModal} onHide={closeDeleteModal}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          Are you sure you want to delete this task? Removing a task is permanent.
+          Are you sure you want to delete this comment? Removing a comment is permanent.
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={() => setShowModal(false)}>
+          <Button variant="secondary" onClick={closeDeleteModal}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={handleDelete}>
+          <Button variant="danger" onClick={handleCommentDelete}>
             Delete
           </Button>
         </Modal.Footer>

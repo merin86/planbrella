@@ -80,6 +80,21 @@
     color: #666;
 }
 
+.Textarea {
+    width: 100%;
+    height: 100px;
+    margin-bottom: 10px;
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  .CommentButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+  }
+  
+
 @media (max-width: 767px) {
     .Container {
         padding: 0;
