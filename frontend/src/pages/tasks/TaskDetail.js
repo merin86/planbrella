@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import styles from "../../styles/Tasks.module.css";
+import styles from "../../styles/TaskDetail.module.css";
 
 const TaskDetail = () => {
   const { id } = useParams();
@@ -24,11 +24,14 @@ const TaskDetail = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.TextBox}>
-        <h2>{task?.title}</h2>
-        <p>{task?.description}</p>
-        <p>Due Date: {new Date(task?.due_date).toLocaleDateString()}</p>
-        <p>Priority: {task?.priority}</p>
-        <p>Category: {task?.category}</p>
+        <div className={styles.Title}>{task?.title}</div>
+        <div className={styles.Description}>{task?.description}</div>
+        <hr className={styles.Divider} />
+        <div className={styles.DueDate}>Due Date: {new Date(task?.due_date).toLocaleDateString()}</div>
+        <div className={styles.ButtonsContainer}>
+          <button className={`btn btn-warning ${styles.Button}`}>Edit</button>
+          <button className={`btn btn-danger ${styles.Button}`}>Delete</button>
+        </div>
       </div>
     </div>
   );
