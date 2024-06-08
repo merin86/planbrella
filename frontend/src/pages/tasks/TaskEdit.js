@@ -16,12 +16,17 @@ const TaskEdit = () => {
         const { data } = await axios.get(`/tasks/${id}/`);
         setTitle(data.title);
         setDescription(data.description);
-        setDueDate(data.due_date.split('T')[0]); // Anpassa till rätt format
+        
+        // Lägg till en dag till datumet
+        const originalDate = new Date(data.due_date);
+        originalDate.setDate(originalDate.getDate() + 1);
+        const formattedDate = originalDate.toISOString().split('T')[0];
+        setDueDate(formattedDate);
       } catch (err) {
         console.error("Error fetching task:", err);
       }
     };
-  
+
     fetchTask();
   }, [id]);
 
