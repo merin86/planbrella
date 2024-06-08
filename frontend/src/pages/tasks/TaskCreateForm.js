@@ -1,16 +1,31 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import styles from '../../styles/TaskCreateForm.module.css'; // Uppdaterad import
+import { Alert } from 'react-bootstrap';
+import styles from '../../styles/TaskCreateForm.module.css';
 
 const TaskCreateForm = () => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
+  const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+
+    // Validera fält
+    const newErrors = {};
+    if (!title.trim()) newErrors.title = 'Title is required and cannot be blank.';
+    if (!description.trim()) newErrors.description = 'Description is required and cannot be blank.';
+    if (!dueDate || dueDate < currentDate) newErrors.dueDate = 'Due Date must be today or later.';
+
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
     try {
       const newTask = {
         title,
@@ -43,6 +58,7 @@ const TaskCreateForm = () => {
               required
               className={styles.Input}
             />
+            {errors.title && <Alert variant="danger">{errors.title}</Alert>}
           </div>
           <div className={styles.FormGroup}>
             <label htmlFor="description">Description:</label>
@@ -50,8 +66,10 @@ const TaskCreateForm = () => {
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
+              required
               className={styles.Textarea}
             />
+            {errors.description && <Alert variant="danger">{errors.description}</Alert>}
           </div>
           <div className={styles.FormGroup}>
             <label htmlFor="dueDate">Due Date:</label>
@@ -63,9 +81,10 @@ const TaskCreateForm = () => {
               required
               className={styles.Input}
             />
+            {errors.dueDate && <Alert variant="danger">{errors.dueDate}</Alert>}
           </div>
           <div className={styles.ButtonGroup}>
-            <button type="submit" className={`${styles.Button} btn btn-success`}>
+            <button type="submit" className={`btn btn-success ${styles.Button}`}>
               Create Task
             </button>
           </div>
