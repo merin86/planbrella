@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
+import InfiniteScroll from "react-infinite-scroll-component";
 import CommentCreateForm from "../comments/CommentCreateForm";
 import styles from "../../styles/TaskDetail.module.css";
 
@@ -10,6 +11,8 @@ const TaskDetail = () => {
   const navigate = useNavigate();
   const [task, setTask] = useState(null);
   const [comments, setComments] = useState([]);
+  const [hasMore, setHasMore] = useState(true);
+  const [page, setPage] = useState(1);
   const [showModal, setShowModal] = useState(false);
 
   useEffect(() => {
@@ -22,20 +25,21 @@ const TaskDetail = () => {
       }
     };
 
-    const fetchComments = async () => {
-      try {
-        const { data } = await axios.get(`/comments/?task=${id}`);
-        console.log("Fetched comments:", data.results);
-        setComments(data.results);
-      } catch (err) {
-        console.error("Error fetching comments:", err);
-        setComments([]); // Set to empty array on error
-      }
-    };
-
     fetchTask();
-    fetchComments();
   }, [id]);
+
+  const fetchComments = async () => {
+    try {
+      const { data } = await axios.get(`/comments/?task=${id}&page=${page}`);
+      setComments((prevComments) => [...prevComments, ...data.results]);
+      if (!data.next) {
+        setHasMore(false);
+      }
+      setPage((prevPage) => prevPage + 1);
+    } catch (err) {
+      console.error("Error fetching comments:", err);
+    }
+  };
 
   const handleEdit = () => {
     navigate(`/tasks/${id}/edit`);
@@ -51,12 +55,7 @@ const TaskDetail = () => {
   };
 
   const handleCommentAdded = (newComment) => {
-    setComments((prevComments) => {
-      if (!Array.isArray(prevComments)) {
-        prevComments = [];
-      }
-      return [...prevComments, newComment];
-    });
+    setComments((prevComments) => [newComment, ...prevComments]);
   };
 
   return (
@@ -65,12 +64,20 @@ const TaskDetail = () => {
         <div className={styles.Title}>{task?.title}</div>
         <div className={styles.Description}>{task?.description}</div>
         <hr className={styles.Divider} />
-        <div className={styles.DueDate}>Due Date: {new Date(task?.due_date).toLocaleDateString()}</div>
+        <div className={styles.DueDate}>
+          Due Date: {new Date(task?.due_date).toLocaleDateString()}
+        </div>
         <div className={styles.ButtonsContainer}>
-          <button onClick={handleEdit} className={`btn btn-warning ${styles.Button}`}>
+          <button
+            onClick={handleEdit}
+            className={`btn btn-warning ${styles.Button}`}
+          >
             Edit
           </button>
-          <button onClick={() => setShowModal(true)} className={`btn btn-danger ${styles.Button}`}>
+          <button
+            onClick={() => setShowModal(true)}
+            className={`btn btn-danger ${styles.Button}`}
+          >
             Delete
           </button>
         </div>
@@ -78,15 +85,23 @@ const TaskDetail = () => {
 
       <div className={styles.CommentsSection}>
         <CommentCreateForm taskId={id} onCommentAdded={handleCommentAdded} />
-        {comments.map((comment) => (
-          <div key={comment.id} className={styles.Comment}>
-            <div className={styles.CommentOwner}>{comment.owner}</div>
-            <div className={styles.CommentText}>{comment.text}</div>
-            <div className={styles.CommentDate}>
-              {new Date(comment.created_at).toLocaleString()}
+        <InfiniteScroll
+          dataLength={comments.length}
+          next={fetchComments}
+          hasMore={hasMore}
+          loader={<h4>Loading...</h4>}
+          endMessage={<p style={{ textAlign: "center" }}><b>No more comments</b></p>}
+        >
+          {comments.map((comment) => (
+            <div key={comment.id} className={styles.Comment}>
+              <div className={styles.CommentOwner}>{comment.owner}</div>
+              <div className={styles.CommentText}>{comment.text}</div>
+              <div className={styles.CommentDate}>
+                {new Date(comment.created_at).toLocaleDateString()}
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </InfiniteScroll>
       </div>
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
