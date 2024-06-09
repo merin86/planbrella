@@ -1,3 +1,4 @@
+/* Styles for the form container */
 .formContainer {
   border: 1px solid #ccc;
   padding: 20px;
@@ -41,7 +42,8 @@
   text-align: center;
 }
 
-.signInText, .signUpText {
+.signInText,
+.signUpText {
   text-align: center;
 }
 

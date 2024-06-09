@@ -1,3 +1,4 @@
+/* Styles for the Task Detail page */
 .Container {
     display: flex;
     flex-direction: column;
@@ -33,6 +34,7 @@
     margin-top: 40px;
 }
 
+/* Styles for the divider line */
 .Divider {
     margin: 20px 0;
     border-bottom: 1px solid #000;
@@ -48,6 +50,7 @@
     margin-right: 10px;
 }
 
+/* Styles for the comments section */
 .CommentsSection {
     margin-top: 20px;
     width: 80%;
@@ -94,6 +97,7 @@
     gap: 5px;
 }
 
+/* Styles for overdue date */
 .OverdueDate {
     color: red;
     font-style: italic;
@@ -104,7 +108,7 @@
     margin-left: 10px;
 }
 
-
+/* Media query for small screens */
 @media (max-width: 767px) {
     .Container {
         padding: 0;

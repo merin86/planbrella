@@ -1,3 +1,4 @@
+/* Styles for the main application */
 .App {
   font-family: 'Montserrat', sans-serif;
   min-height: 100vh;
@@ -6,14 +7,17 @@
   transition: margin-top 0.3s ease;
 }
 
+/* Global box-sizing rule for all elements */
 * {
   box-sizing: border-box;
 }
 
+/* Styles for the content section of the app */
 .content {
   padding-top: 120px;
 }
 
+/* Styles for the content section when the menu is open, shifting it down */
 .contentShift {
   padding-top: 140px;
 }

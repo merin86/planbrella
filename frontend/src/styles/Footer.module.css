@@ -1,25 +1,27 @@
+/* Styles for the footer container */
 .Footer {
-    background-color: rgba(55, 130, 255, 255);
-    min-height: 100px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 20px;
-    width: 100%;
-    margin-top: 20px;
-    border: 1px solid #09090c;
-  }
-  
-  .Title {
-    font-size: 1.5rem;
-    margin: 5px 0;
-    font-weight: bold;
-  }
-  
-  .Paragraph {
-    font-size: 1rem;
-    margin: 5px 0;
-  }
-  
+  background-color: rgba(55, 130, 255, 255);
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  width: 100%;
+  margin-top: 20px;
+  border: 1px solid #09090c;
+}
+
+/* Styles for the title inside the footer */
+.Title {
+  font-size: 1.5rem;
+  margin: 5px 0;
+  font-weight: bold;
+}
+
+/* Styles for paragraphs inside the footer */
+.Paragraph {
+  font-size: 1rem;
+  margin: 5px 0;
+}

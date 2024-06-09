@@ -21,7 +21,7 @@ const Tasks = () => {
         );
         setTasks(sortedTasks); // Update state with sorted tasks
       } catch (err) {
-        console.log(err);
+        // console.log(err);
       }
     };
     fetchTasks(); // Call the fetch function on component mount

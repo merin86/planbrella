@@ -1,3 +1,4 @@
+/* Styles for the navigation bar container */
 .NavBar {
     background-color: lightblue;
     border: 1px solid #09090c;
@@ -8,6 +9,7 @@
     z-index: 1000;
 }
 
+/* Styles for the navigation links */
 .NavLink {
     color: black;
     margin: 0 15px;
@@ -20,10 +22,12 @@
     cursor: pointer;
 }
 
+/* Styles for navigation links on hover */
 .NavLink:hover {
     text-decoration: underline;
 }
 
+/* Styles for the active navigation link */
 .NavLinkActive {
     color: rgb(0, 157, 255);
     font-size: 1.2rem;
@@ -34,6 +38,7 @@
     display: inline-block;
 }
 
+/* Styles for text elements in the navigation bar */
 .NavText {
     color: rgb(241, 40, 40);
     margin: 0 15px;
@@ -48,6 +53,7 @@
     margin-right: auto;
 }
 
+/* Media query for responsive navigation bar height on smaller screens */
 @media (max-width: 767px) {
     .NavBar {
         height: auto;

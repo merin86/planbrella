@@ -1,9 +1,12 @@
-html, body {
+/* Ensure the html and body elements take up the full height of the viewport and have no margin or padding */
+html,
+body {
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
+/* Make the root element a flex container that takes up at least the full height of the viewport */
 #root {
   display: flex;
   flex-direction: column;

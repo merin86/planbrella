@@ -38,7 +38,7 @@ const NavBar = ({ onToggle }) => {
       handleClose();
       navigate("/");
     } catch (err) {
-      console.log(err);
+      // console.log(err);
     }
   };
 

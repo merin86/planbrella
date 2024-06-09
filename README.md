@@ -1,4 +1,4 @@
-# Planbrella (Project Portfolio 5, Code Instituute)
+# Planbrella (Project Portfolio 5, Code Institute)
 
 [The actual website](https://)
 
@@ -23,6 +23,8 @@ Text...
 ### Profile
 
 ### Tasks
+
+### Comments
 
 ## Testing
 
@@ -95,6 +97,12 @@ The index.html file has been validated, resulting in 3 errors because the linter
 <summary>HTML Validation</summary>
 <img src="documentation/images/html-validator.jpg">
 </details>
+
+#### CSS
+
+CSS validation was completed using [W3 Validator](https://jigsaw.w3.org/css-validator/)
+
+- All CSS files has been validated and shows no errors.
 
 #### JavaScript (JSX)
 
