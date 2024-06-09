@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn planbrella_api.wsgi --log-file -
+web: serve -s build
