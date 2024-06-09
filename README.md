@@ -83,7 +83,36 @@ The website uses font-family: 'Montserrat'. A trendy and elegant style with a di
 
 ## Testing
 
+### Validator Testing
+
+#### HTML
+
+HTML validation was completed using [W3 Validator](https://validator.w3.org/)
+
+The index.html file has been validated, resulting in 3 errors because the linter does not recognize the %PUBLIC_URL% value. These errors do not impact the project or code functionality. Additionally, there are 8 informational messages that do not affect the code.
+
+<details>
+<summary>HTML Validation</summary>
+<img src="documentation/images/html-validator.jpg">
+</details>
+
+#### JavaScript (JSX)
+
+To test the code in the Front-End, the Eslint extension has been installed in GitPod. There were some minor errors, but these have been fixed. Issues that remain are as follows:
+
+<details>
+<summary>Eslint</summary>
+<img src="documentation/images/eslint.jpg">
+</details>
+
 ## Bugs
+
+- When pressing the Edit button to update a Task, the date was backdated by one day. To solve this, this code was used:
+
+<details>
+<summary>dueDate</summary>
+<img src="documentation/images/edit-task-date.jpg">
+</details>
 
 ---
 

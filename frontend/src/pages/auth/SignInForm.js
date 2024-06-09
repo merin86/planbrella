@@ -2,22 +2,27 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import PropTypes from 'prop-types';
 import styles from '../../styles/SignInUpForm.module.css';
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
 
+  // State to manage form input data
   const [signInData, setSignInData] = useState({
     username: '',
     password: '',
   });
   const { username, password } = signInData;
 
+  // State to manage form errors
   const [errors, setErrors] = useState({});
 
+  // Hook to navigate to different routes
   const navigate = useNavigate();
 
+  // Handle input change
   const handleChange = (event) => {
     setSignInData({
       ...signInData,
@@ -25,16 +30,20 @@ function SignInForm() {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Send sign in request
       const { data } = await axios.post('/dj-rest-auth/login/', signInData);
       localStorage.setItem('token', data.key);
 
+      // Fetch current user data
       const userResponse = await axios.get("/dj-rest-auth/user/");
       setCurrentUser(userResponse.data);
       navigate('/');
     } catch (err) {
+      // Set errors if any
       setErrors(err.response?.data);
     }
   };
@@ -92,7 +101,7 @@ function SignInForm() {
         <div className={styles.divider}>or</div>
 
         <p className={styles.signUpText}>
-          Don't have an account?{' '}
+          Don&apos;t have an account?{' '}
           <Link to="/sign-up" className={styles.link}>
             Sign up here!
           </Link>
@@ -101,5 +110,10 @@ function SignInForm() {
     </div>
   );
 }
+
+// Define prop types for the SignInForm component
+SignInForm.propTypes = {
+  setCurrentUser: PropTypes.func.isRequired,
+};
 
 export default SignInForm;

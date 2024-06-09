@@ -1,6 +1,7 @@
-import React from 'react';
-import styles from '../styles/Footer.module.css';
+import React from "react";
+import styles from "../styles/Footer.module.css";
 
+// Footer component definition
 const Footer = () => {
   return (
     <footer className={styles.Footer}>

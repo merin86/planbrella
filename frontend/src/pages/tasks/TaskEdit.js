@@ -1,24 +1,29 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate, useParams } from 'react-router-dom';
-import { Alert } from 'react-bootstrap';
-import styles from '../../styles/TaskEdit.module.css';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate, useParams } from "react-router-dom";
+import { Alert } from "react-bootstrap";
+import styles from "../../styles/TaskEdit.module.css";
 
 const TaskEdit = () => {
-  const { id } = useParams();
+  const { id } = useParams(); // Retrieve task ID from URL parameters
   const navigate = useNavigate();
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueDate, setDueDate] = useState('');
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
+  const [dueDate, setDueDate] = useState("");
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
+    // Fetch task details on component mount
     const fetchTask = async () => {
       try {
         const { data } = await axios.get(`/tasks/${id}/`);
         setTitle(data.title);
         setDescription(data.description);
-        setDueDate(new Date(data.due_date).toISOString().split('T')[0]); // YYYY-MM-DD format
+
+        // Adjust due date by adding one day for proper display
+        const dueDate = new Date(data.due_date);
+        dueDate.setDate(dueDate.getDate() + 1);
+        setDueDate(dueDate.toISOString().split("T")[0]);
       } catch (err) {
         console.error("Error fetching task:", err);
       }
@@ -27,19 +32,24 @@ const TaskEdit = () => {
     fetchTask();
   }, [id]);
 
+  // Handle cancel button click
   const handleCancel = () => {
-    navigate('/tasks');
+    navigate("/tasks");
   };
 
+  // Handle save button click
   const handleSave = async (e) => {
     e.preventDefault();
-    const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    const currentDate = new Date().toISOString().split("T")[0];
 
-    // Validera fält
+    // Validate form fields
     const newErrors = {};
-    if (!title.trim()) newErrors.title = 'Title is required and cannot be blank.';
-    if (!description.trim()) newErrors.description = 'Description is required and cannot be blank.';
-    if (!dueDate || dueDate < currentDate) newErrors.dueDate = 'Due Date must be today or later.';
+    if (!title.trim())
+      newErrors.title = "Title is required and cannot be blank.";
+    if (!description.trim())
+      newErrors.description = "Description is required and cannot be blank.";
+    if (!dueDate || dueDate < currentDate)
+      newErrors.dueDate = "Due Date must be today or later.";
 
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -52,14 +62,18 @@ const TaskEdit = () => {
         description,
         due_date: new Date(dueDate).toISOString(),
       };
+      // Send updated task data to the server
       await axios.put(`/tasks/${id}/`, updatedTask, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
-      navigate('/tasks');
+      navigate("/tasks");
     } catch (err) {
-      console.error('Error updating task:', err.response ? err.response.data : err.message);
+      console.error(
+        "Error updating task:",
+        err.response ? err.response.data : err.message
+      );
     }
   };
 
@@ -89,7 +103,9 @@ const TaskEdit = () => {
               required
               className={styles.Textarea}
             />
-            {errors.description && <Alert variant="danger">{errors.description}</Alert>}
+            {errors.description && (
+              <Alert variant="danger">{errors.description}</Alert>
+            )}
           </div>
           <div className={styles.FormGroup}>
             <label htmlFor="dueDate">Due Date:</label>
@@ -104,10 +120,17 @@ const TaskEdit = () => {
             {errors.dueDate && <Alert variant="danger">{errors.dueDate}</Alert>}
           </div>
           <div className={styles.ButtonGroup}>
-            <button type="submit" className={`btn btn-success ${styles.Button}`}>
+            <button
+              type="submit"
+              className={`btn btn-success ${styles.Button}`}
+            >
               Save
             </button>
-            <button type="button" onClick={handleCancel} className={`btn btn-danger ${styles.Button}`}>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className={`btn btn-danger ${styles.Button}`}
+            >
               Cancel
             </button>
           </div>

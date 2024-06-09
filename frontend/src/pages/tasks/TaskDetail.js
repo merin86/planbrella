@@ -19,6 +19,7 @@ const TaskDetail = () => {
   const [newCommentText, setNewCommentText] = useState("");
   const [editError, setEditError] = useState("");
 
+  // Fetch task details on component mount
   useEffect(() => {
     const fetchTask = async () => {
       try {
@@ -32,6 +33,7 @@ const TaskDetail = () => {
     fetchTask();
   }, [id]);
 
+  // Fetch comments for the task
   const fetchComments = async () => {
     try {
       const { data } = await axios.get(`/comments/?task=${id}&page=${page}`);
@@ -45,24 +47,29 @@ const TaskDetail = () => {
     }
   };
 
+  // Navigate to the task edit page
   const handleEdit = () => {
     navigate(`/tasks/${id}/edit`);
   };
 
+  // Add a new comment to the comments list
   const handleCommentAdded = (newComment) => {
     setComments((prevComments) => [newComment, ...prevComments]);
   };
 
+  // Open the delete confirmation modal
   const openDeleteModal = (comment) => {
     setCommentToDelete(comment);
     setShowDeleteModal(true);
   };
 
+  // Close the delete confirmation modal
   const closeDeleteModal = () => {
     setShowDeleteModal(false);
     setCommentToDelete(null);
   };
 
+  // Handle comment deletion
   const handleCommentDelete = async () => {
     try {
       await axios.delete(`/comments/${commentToDelete.id}/`);
@@ -75,22 +82,26 @@ const TaskDetail = () => {
     }
   };
 
+  // Start editing a comment
   const startEditing = (comment) => {
     setEditingCommentId(comment.id);
     setNewCommentText(comment.text);
     setEditError("");
   };
 
+  // Cancel editing a comment
   const cancelEditing = () => {
     setEditingCommentId(null);
     setNewCommentText("");
     setEditError("");
   };
 
+  // Validate the comment text
   const validateComment = (text) => {
     return text.trim().length > 0;
   };
 
+  // Handle comment update
   const handleCommentUpdate = async () => {
     if (!validateComment(newCommentText)) {
       setEditError("Comment cannot be empty or whitespace.");

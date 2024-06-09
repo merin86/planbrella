@@ -5,38 +5,44 @@ import { Alert } from 'react-bootstrap';
 import styles from '../../styles/TaskCreateForm.module.css';
 
 const TaskCreateForm = () => {
+  // State variables for form inputs and errors
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [errors, setErrors] = useState({});
   const navigate = useNavigate();
 
+  // Handle form submission
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const currentDate = new Date().toISOString().split('T')[0]; // YYYY-MM-DD format
+    const currentDate = new Date().toISOString().split('T')[0];
 
-    // Validera fält
+    // Validate form inputs
     const newErrors = {};
     if (!title.trim()) newErrors.title = 'Title is required and cannot be blank.';
     if (!description.trim()) newErrors.description = 'Description is required and cannot be blank.';
     if (!dueDate || dueDate < currentDate) newErrors.dueDate = 'Due Date must be today or later.';
 
+    // If there are validation errors, set errors state and return
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
 
     try {
+      // Create new task object
       const newTask = {
         title,
         description,
         due_date: new Date(dueDate).toISOString(),
       };
+      // Send POST request to create new task
       await axios.post('/tasks/', newTask, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
+      // Navigate to tasks page after successful creation
       navigate('/tasks');
     } catch (err) {
       console.error('Error creating task:', err.response ? err.response.data : err.message);

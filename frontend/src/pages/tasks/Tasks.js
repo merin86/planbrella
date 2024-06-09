@@ -6,43 +6,49 @@ import { Modal, Button } from 'react-bootstrap';
 import styles from "../../styles/Tasks.module.css";
 
 const Tasks = () => {
-  const [tasks, setTasks] = useState([]);
-  const [showModal, setShowModal] = useState(false);
-  const [taskToDelete, setTaskToDelete] = useState(null);
+  const [tasks, setTasks] = useState([]); // State to hold the list of tasks
+  const [showModal, setShowModal] = useState(false); // State to control the visibility of the delete confirmation modal
+  const [taskToDelete, setTaskToDelete] = useState(null); // State to hold the task to be deleted
 
   useEffect(() => {
+    // Function to fetch tasks from the server
     const fetchTasks = async () => {
       try {
         const { data } = await axios.get("/tasks/");
+        // Sort tasks by due date
         const sortedTasks = data.sort(
           (a, b) => new Date(a.due_date) - new Date(b.due_date)
         );
-        setTasks(sortedTasks);
+        setTasks(sortedTasks); // Update state with sorted tasks
       } catch (err) {
         console.log(err);
       }
     };
-    fetchTasks();
+    fetchTasks(); // Call the fetch function on component mount
   }, []);
 
+  // Function to handle task deletion
   const handleDelete = async () => {
     try {
       await axios.delete(`/tasks/${taskToDelete.id}/`);
+      // Remove the deleted task from the state
       setTasks(tasks.filter(task => task.id !== taskToDelete.id));
-      setShowModal(false);
+      setShowModal(false); // Close the delete confirmation modal
     } catch (err) {
       console.error('Error deleting task:', err);
     }
   };
 
+  // Function to open the delete confirmation modal
   const openModal = (task) => {
-    setTaskToDelete(task);
-    setShowModal(true);
+    setTaskToDelete(task); // Set the task to be deleted
+    setShowModal(true); // Show the delete confirmation modal
   };
 
+  // Function to close the delete confirmation modal
   const closeModal = () => {
     setShowModal(false);
-    setTaskToDelete(null);
+    setTaskToDelete(null); // Clear the task to be deleted
   };
 
   return (

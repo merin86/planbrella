@@ -5,6 +5,7 @@ import axios from 'axios';
 import styles from '../../styles/SignInUpForm.module.css';
 
 function SignUpForm() {
+  // State to manage form input data
   const [signUpData, setSignUpData] = useState({
     username: '',
     password1: '',
@@ -12,10 +13,13 @@ function SignUpForm() {
   });
   const { username, password1, password2 } = signUpData;
 
+  // State to manage form errors
   const [errors, setErrors] = useState({});
 
+  // Hook to navigate to different routes
   const navigate = useNavigate();
 
+  // Handle input change
   const handleChange = (event) => {
     setSignUpData({
       ...signUpData,
@@ -23,12 +27,15 @@ function SignUpForm() {
     });
   };
 
+  // Handle form submission
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      // Send sign up request
       await axios.post('/dj-rest-auth/registration/', signUpData);
       navigate('/sign-in');
     } catch (err) {
+      // Set errors if any
       setErrors(err.response?.data);
     }
   };

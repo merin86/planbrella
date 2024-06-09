@@ -1,11 +1,14 @@
-import { createContext, useContext, useEffect, useMemo, useState } from "react";
+import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useNavigate } from "react-router-dom";
 
+// Create contexts for current user and setter
 export const CurrentUserContext = createContext();
 export const SetCurrentUserContext = createContext();
 
+// Custom hooks for using the contexts
 export const useCurrentUser = () => useContext(CurrentUserContext);
 export const useSetCurrentUser = () => useContext(SetCurrentUserContext);
 
@@ -13,6 +16,7 @@ export const CurrentUserProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(null);
   const navigate = useNavigate();
 
+  // Fetch the current user data when the component mounts
   const handleMount = async () => {
     try {
       const { data } = await axiosRes.get("/dj-rest-auth/user/");
@@ -27,6 +31,7 @@ export const CurrentUserProvider = ({ children }) => {
   }, []);
 
   useMemo(() => {
+    // Intercept requests to refresh the token if necessary
     axiosReq.interceptors.request.use(
       async (config) => {
         try {
@@ -47,6 +52,7 @@ export const CurrentUserProvider = ({ children }) => {
       }
     );
 
+    // Intercept responses to handle 401 errors
     axiosRes.interceptors.response.use(
       (response) => response,
       async (err) => {
@@ -75,4 +81,9 @@ export const CurrentUserProvider = ({ children }) => {
       </SetCurrentUserContext.Provider>
     </CurrentUserContext.Provider>
   );
+};
+
+// Define prop types for the CurrentUserProvider component
+CurrentUserProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

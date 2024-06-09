@@ -15,26 +15,26 @@ import useMenuState from "./hooks/useMenuState";
 import "./api/axiosDefaults";
 
 function App() {
-  const { menuOpen, setMenuOpen, paddingTop } = useMenuState();
+  const { menuOpen, setMenuOpen, paddingTop } = useMenuState(); // Custom hook to manage menu state
 
   return (
     <div
       className={classNames(styles.App, { [styles.contentShift]: menuOpen })}
     >
-      <NavBar onToggle={(isOpen) => setMenuOpen(isOpen)} />
-      <div className={styles.content} style={{ paddingTop, flex: 1 }}>
+      <NavBar onToggle={(isOpen) => setMenuOpen(isOpen)} /> {/* Navbar component with toggle handler */}
+      <div className={styles.content} style={{ paddingTop, flex: 1 }}> {/* Main content area with dynamic padding */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/sign-in" element={<SignInForm />} />
-          <Route path="/sign-up" element={<SignUpForm />} />
-          <Route path="/tasks" element={<Tasks />} />
-          <Route path="/tasks/create" element={<TaskCreateForm />} />
-          <Route path="/tasks/:id" element={<TaskDetail />} />
-          <Route path="/tasks/:id/edit" element={<TaskEdit />} />
-          <Route path="*" element={<p>Page not found!</p>} />
+          <Route path="/" element={<Home />} /> {/* Home page route */}
+          <Route path="/sign-in" element={<SignInForm />} /> {/* Sign-in form route */}
+          <Route path="/sign-up" element={<SignUpForm />} /> {/* Sign-up form route */}
+          <Route path="/tasks" element={<Tasks />} /> {/* Tasks list route */}
+          <Route path="/tasks/create" element={<TaskCreateForm />} /> {/* Task creation form route */}
+          <Route path="/tasks/:id" element={<TaskDetail />} /> {/* Task detail view route */}
+          <Route path="/tasks/:id/edit" element={<TaskEdit />} /> {/* Task edit form route */}
+          <Route path="*" element={<p>Page not found!</p>} /> {/* Fallback route for undefined paths */}
         </Routes>
       </div>
-      <Footer />
+      <Footer /> {/* Footer component */}
     </div>
   );
 }

@@ -5,23 +5,31 @@ import axios from "axios";
 import logo from "../assets/logo.jpg";
 import styles from "../styles/NavBar.module.css";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
+import PropTypes from 'prop-types';
 
 const NavBar = ({ onToggle }) => {
+  // State to track if the navbar is expanded
   const [expanded, setExpanded] = useState(false);
+  // Get the current user from context
   const currentUser = useCurrentUser();
+  // Function to set the current user in context
   const setCurrentUser = useSetCurrentUser();
+  // Hook to navigate programmatically
   const navigate = useNavigate();
 
+  // Toggle the navbar expansion and call the onToggle prop
   const handleToggle = () => {
     setExpanded(!expanded);
     onToggle(!expanded);
   };
 
+  // Close the navbar and call the onToggle prop
   const handleClose = () => {
     setExpanded(false);
     onToggle(false);
   };
 
+  // Handle sign out, clear the token, update user context and navigate to home
   const handleSignOut = async () => {
     try {
       await axios.post("/dj-rest-auth/logout/");
@@ -34,6 +42,7 @@ const NavBar = ({ onToggle }) => {
     }
   };
 
+  // Icons to display when user is logged in
   const loggedInIcons = (
     <>
       <NavLink
@@ -52,6 +61,7 @@ const NavBar = ({ onToggle }) => {
     </>
   );
 
+  // Icons to display when user is logged out
   const loggedOutIcons = (
     <>
       <NavLink
@@ -95,6 +105,11 @@ const NavBar = ({ onToggle }) => {
       </Container>
     </Navbar>
   );
+};
+
+// Define prop types for the NavBar component
+NavBar.propTypes = {
+  onToggle: PropTypes.func.isRequired,
 };
 
 export default NavBar;
