@@ -108,11 +108,10 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-CORS_ALLOWED_ORIGINS = [
-    'https://8080-merin86-planbrella-ncxle2zpv05.ws-eu114.gitpod.io',
-    os.environ.get('CLIENT_ORIGIN')
-]
+if 'CLIENT_ORIGIN' in os.environ:
+    CORS_ALLOWED_ORIGINS = [
+        os.environ.get('CLIENT_ORIGIN')
+    ]
 
 CORS_ALLOW_CREDENTIALS = True
 
