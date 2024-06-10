@@ -120,9 +120,9 @@ I tried various ways to fix this, but in the end had to take the help of a tutor
 
 # Front-End
 
-## User Experience (UX)
-
 ## Features
+
+### Future Features
 
 ## Reusable Components
 
@@ -198,6 +198,28 @@ To test the code in the Front-End, the Eslint extension has been installed in Gi
 ---
 
 # Overall
+
+## User Experience (UX)
+
+### User Stories
+
+All issues are in GitHub within the [Planbrella](https://github.com/users/merin86/projects/7/views/1) project. Acceptance criteria and tasks for the issues can be viewed there.
+
+[Milestones](https://github.com/merin86/planbrella/milestones) were linked to the project.
+
+The Kanban board was instrumental in tracking progress and managing tasks throughout this project. It facilitated planning and the addition of new features, ensuring that all tasks were organized and easily accessible. An additional section was created in the Kanban board with the heading "Wont Have". These features became overwhelming for this project and have therefore been placed under [Future Features](#future-features).
+
+| **EPIC** | **ID #** | **User Story** | **Label** |
+|-------------|------------|---------------------|---------------------|
+| **User Authentication** | 
+|  | 1 | As a Site User I can register an account and log in with existing user details so that I can have a personalized and secure experience | Must Have |
+| **Task management** | 
+|  | 2 | As a logged in user I can create new tasks within the application so that I can organize and plan my work more easily | Must Have |
+|  | 3 | As a logged in user I can view details, edit and delete tasks so that I can effectively manage my daily activities | Must Have |
+|  | 5 | As a logged in user I want the system to automatically identify and mark tasks as overdue so that I can immediately see which tasks need immediate attention | Could Have |
+ | **Comment Management** | 
+|  | 11 | As a logged in user I can post comments on tasks so that I can engage in discussions about task details and progress with other team members | Must Have |
+
 
 ## Technologies Used
 
