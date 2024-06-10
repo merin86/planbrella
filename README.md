@@ -79,8 +79,6 @@ The User Model is included in the Django Rest Framework's dj-rest-auth library. 
 
 # Back-End
 
-## Database
-
 ## Testing
 
 ### Automated Testing
@@ -303,6 +301,10 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 
 ## Credits
 
+### Content
+
+- The content of the web page is created by the developer.
+
 ### Code
 
 #### Tutorials
@@ -335,8 +337,8 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 
 - This page was used to generate a secret code: [Djecrety](https://djecrety.ir/)
 
-## Media
-
 ## Acknowledgment
 
 - I want to thank the tutor (Roman) who helped me fix the "bug" that caused problems when I tried to open my APIView via Heroku.
+
+- I also want to thank the tutor (Thomas) who helped me when I was deploying the unified application to Heroku.
