@@ -220,6 +220,19 @@ The Kanban board was instrumental in tracking progress and managing tasks throug
  | **Comment Management** | 
 |  | 11 | As a logged in user I can post comments on tasks so that I can engage in discussions about task details and progress with other team members | Must Have |
 
+### Flow Diagram
+
+- A non-logged in user can see the home page when the user comes to the page. Here there are only the options to Sign In or Sign Up.
+
+- A logged in user can see the front page, enter the tasks page, create tasks (with CRUD functionality) and write comments (with CRUD functionality) in a specific task. The user can now also Sign Out. The username of the logged in is now also visible in red text to the right of the Sign Out button. If a task is overdue, this is shown by the Due Date becoming red and italicized, and that it says Overdue next to the Due Date.
+
+Flow diagram was created using [Lucidchart](https://lucidchart.com/)
+
+- Flow chart for user:
+
+
+
+
 
 ## Technologies Used
 

@@ -18,6 +18,7 @@ const TaskDetail = () => {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [newCommentText, setNewCommentText] = useState("");
   const [editError, setEditError] = useState("");
+  const [showTaskDeleteModal, setShowTaskDeleteModal] = useState(false);
 
   // Fetch task details on component mount
   useEffect(() => {
@@ -57,13 +58,13 @@ const TaskDetail = () => {
     setComments((prevComments) => [newComment, ...prevComments]);
   };
 
-  // Open the delete confirmation modal
+  // Open the comment delete confirmation modal
   const openDeleteModal = (comment) => {
     setCommentToDelete(comment);
     setShowDeleteModal(true);
   };
 
-  // Close the delete confirmation modal
+  // Close the comment delete confirmation modal
   const closeDeleteModal = () => {
     setShowDeleteModal(false);
     setCommentToDelete(null);
@@ -71,6 +72,7 @@ const TaskDetail = () => {
 
   // Handle comment deletion
   const handleCommentDelete = async () => {
+    if (!commentToDelete) return;
     try {
       await axios.delete(`/comments/${commentToDelete.id}/`);
       setComments((prevComments) =>
@@ -79,6 +81,26 @@ const TaskDetail = () => {
       closeDeleteModal();
     } catch (err) {
       console.error("Error deleting comment:", err);
+    }
+  };
+
+  // Open the task delete confirmation modal
+  const openTaskDeleteModal = () => {
+    setShowTaskDeleteModal(true);
+  };
+
+  // Close the task delete confirmation modal
+  const closeTaskDeleteModal = () => {
+    setShowTaskDeleteModal(false);
+  };
+
+  // Handle task deletion
+  const handleTaskDelete = async () => {
+    try {
+      await axios.delete(`/tasks/${id}/`);
+      navigate("/tasks");
+    } catch (err) {
+      console.error("Error deleting task:", err);
     }
   };
 
@@ -149,7 +171,7 @@ const TaskDetail = () => {
             Edit
           </button>
           <button
-            onClick={() => setShowDeleteModal(true)}
+            onClick={openTaskDeleteModal}
             className={`btn btn-danger ${styles.Button}`}
           >
             Delete
@@ -232,6 +254,24 @@ const TaskDetail = () => {
             Cancel
           </Button>
           <Button variant="danger" onClick={handleCommentDelete}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+
+      <Modal show={showTaskDeleteModal} onHide={closeTaskDeleteModal}>
+        <Modal.Header closeButton>
+          <Modal.Title>Confirm Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          Are you sure you want to delete this task? Removing a task is
+          permanent.
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={closeTaskDeleteModal}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={handleTaskDelete}>
             Delete
           </Button>
         </Modal.Footer>
