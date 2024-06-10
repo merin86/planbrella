@@ -230,9 +230,7 @@ Flow diagram was created using [Lucidchart](https://lucidchart.com/)
 
 - Flow chart for user:
 
-
-
-
+![Flowchart](documentation/images/flowchart.jpg)
 
 ## Technologies Used
 
