@@ -1,10 +1,10 @@
 # Planbrella (Project Portfolio 5, Code Institute)
 
-[The actual website](https://)
+[The actual website](https://planbrella-ad4018061f52.herokuapp.com/)
 
 The primary goal of this project was to develop an intuitive and user-friendly application that enables users to plan and organize their work efficiently. The app aims to provide a structured approach to task management, ensuring users can easily create, track, and manage their tasks.
 
-![Mockup]()
+![Mockup](documentation/images/mockup.jpg)
 
 ## Content Index
 
