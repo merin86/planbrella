@@ -2,7 +2,7 @@
 
 [The actual website](https://)
 
-Text...
+The primary goal of this project was to develop an intuitive and user-friendly application that enables users to plan and organize their work efficiently. The app aims to provide a structured approach to task management, ensuring users can easily create, track, and manage their tasks.
 
 ![Mockup]()
 
@@ -11,6 +11,18 @@ Text...
 ---
 
 # Planing Stage
+
+## Wireframes
+
+Wireframes, used as starting points for the design of the website, were created with Microsoft Paint:
+
+- Desktop Wireframe
+
+![Desktop Wireframe](documentation/images/wireframe-desktop.jpg)
+
+- Mobile Wireframe
+
+![Mobile Wireframe](documentation/images/wireframe-mobile.jpg)
 
 ---
 
@@ -30,7 +42,7 @@ Text...
 
 ### Automated Testing
 
-- Back-End, views (Tasks)...
+- Back-End, views (Tasks)
 
 The automated testing is not comprehensive, but it gives an indication of the developer's ability to create automated tests.
 
@@ -68,6 +80,24 @@ I tried various ways to fix this, but in the end had to take the help of a tutor
 ## User Experience (UX)
 
 ## Features
+
+## Reusable Components
+
+The project utilizes several reusable components across the site. This approach was facilitated by isolating each function into its own file, which then allows for easy importing into other files where the component is needed. While it's always possible to import different files, the advantage of separating your code into smaller, specific files is that it makes the codebase more readable and manageable. By importing only the necessary code, it becomes easier to understand and enhances the functionality of the website.
+
+Below is a list of components that has been separated into their own files to be reused throughout the website. These components, along with others, are imported into various files within the project.
+
+- NavBar.js
+
+    The navigation bar is a critical component used throughout the site. It is imported and displayed on each page, providing users with easy access to different sections of the website.
+
+- CommentCreateForm.js
+
+    This form is used for creating comments and is integrated into multiple places where user interaction is needed, such as on task detail pages.
+
+- CurrentUserContext.js
+
+    The context for managing the current user's state is used across different components to ensure consistent user data and authentication status.
 
 ## Design
 
@@ -137,18 +167,37 @@ To test the code in the Front-End, the Eslint extension has been installed in Gi
 
 ### Frameworks, Libraries and Programs Used
 
--   [GitPod](https://www.gitpod.io/):
-The IDE where the site was built.
--   [GitHub](https://github.com/):
-To host and store the data for the site.
--   [Heroku](https://www.heroku.com/):
-Used to deploy the project.
--   [ElephantSQL](https://customer.elephantsql.com/):
-Used to store PostgreSQL database.
--   [Django REST Framework](https://www.django-rest-framework.org/):
-Framework used to create the Back-End for the web page.
--   [React Bootstrap](https://react-bootstrap.github.io/):
-CSS framework used as a tool to style the web page.
+-   [GitPod](https://www.gitpod.io/)
+
+    The IDE where the site was built.
+
+-   [GitHub](https://github.com/)
+
+    To host and store the data for the site.
+
+-   [Heroku](https://www.heroku.com/)
+
+    Used to deploy the project.
+
+-   [ElephantSQL](https://customer.elephantsql.com/)
+
+    Used to store PostgreSQL database.
+
+-   [Django REST Framework](https://www.django-rest-framework.org/)
+
+    Framework used to create the Back-End for the web page.
+
+-   [React](https://react.dev/)
+
+    Core library for building the user interface.
+
+    - React is a powerful JavaScript library for building fast and interactive user interfaces. Its component-based architecture makes it easy to create reusable UI components, manage state efficiently, and handle complex UIs with ease.
+
+-   [React Bootstrap](https://react-bootstrap.github.io/)
+
+    CSS framework used as a tool to style the web page.
+
+    - React Bootstrap combines the power of Bootstrap with React, providing pre-built components that are fully responsive and customizable. This library helps in creating a consistent and visually appealing user interface quickly.
 
 ### Packages
 
@@ -158,15 +207,13 @@ Most important packages:
 - djangorestframework
 - django-allauth
 - dj-rest-auth
+- react
+- react-router-dom
+- react-infinite-scroll-component
 - psycopg2
 - Gunicorn
 - whitenoise
-- 
-
-<details>
-<summary>All packages</summary>
-<img src="">
-</details>
+- eslint
 
 ## Agile
 
