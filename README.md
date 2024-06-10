@@ -24,19 +24,62 @@ Wireframes, used as starting points for the design of the website, were created 
 
 ![Mobile Wireframe](documentation/images/wireframe-mobile.jpg)
 
+## Database Plan
+
+Entity Relationship Diagrams (ERD) have been used to plan the models in the Back-End.
+
+### User Model
+
+The User Model is included in the Django Rest Framework's dj-rest-auth library. It stores essential information about authenticated users, such as their username and password.
+
+### Profiles Model
+
+| **Name** | **Field Type** | **Validation** |
+|-------------|------------|---------------------|
+| owner | OneToOneField | on_delete=CASCADE, related_name='profile', required | 
+| created_at | DateTimeField | default=now |
+| name | CharField | max_length=100, blank=True, null=True |
+| description | TextField | blank=True, null=True |
+
+- Signal handling:
+    - create_user_profile: Creates a profile for each new user upon user creation.
+    - save_user_profile: Saves the profile associated with the user when the user is saved.
+
+
+### Tasks Model
+
+| **Name** | **Field Type** | **Validation** |
+|-------------|------------|---------------------|
+| title | CharField | max_length=255 | 
+| description | TextField | blank=True, null=True |
+| created_at | DateTimeField | auto_now_add=True, editable=False |
+| due_date | DateTimeField |  |
+| owner | ForeignKey | related_name='owned_tasks', on_delete=models.CASCADE |
+
+- owner:
+    - ForeignKey (to settings.AUTH_USER_MODEL)
+- is_overdue:
+    - Determines if the task is overdue based on the current date and the due date.
+
+### Comments Model
+
+| **Name** | **Field Type** | **Validation** |
+|-------------|------------|---------------------|
+| task | ForeignKey | related_name='comments', on_delete=models.CASCADE | 
+| owner | ForeignKey | on_delete=models.CASCADE |
+| text | TextField |  |
+| created_at | DateTimeField | auto_now_add=True |
+| updated_at | DateTimeField | auto_now=True |
+
+- owner/task:
+    - ForeignKey
+
+
 ---
 
 # Back-End
 
 ## Database
-
-## Models
-
-### Profile
-
-### Tasks
-
-### Comments
 
 ## Testing
 
