@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
-import { Form, Button, Container, Alert } from 'react-bootstrap';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import styles from '../../styles/SignInUpForm.module.css';
+import React, { useState } from "react";
+import { Form, Button, Container, Alert } from "react-bootstrap";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import styles from "../../styles/SignInUpForm.module.css";
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
+import { useRedirect } from "../../hooks/useRedirect";
+import { setTokenTimestamp } from "../../utils/utils";
 
 function SignInForm() {
   const setCurrentUser = useSetCurrentUser();
+  useRedirect("loggedIn");
 
   // State to manage form input data
   const [signInData, setSignInData] = useState({
@@ -35,12 +38,8 @@ function SignInForm() {
     try {
       // Send sign in request
       const { data } = await axios.post('/dj-rest-auth/login/', signInData);
-      console.log("data in sign in", data)
-      localStorage.setItem('token', data.key);
-
-      // Fetch current user data
-      const userResponse = await axios.get("/dj-rest-auth/user/");
-      setCurrentUser(userResponse.data);
+      setCurrentUser(data.user);
+      setTokenTimestamp(data);
       navigate('/');
     } catch (err) {
       // Set errors if any
@@ -93,7 +92,11 @@ function SignInForm() {
             </Alert>
           ))}
 
-          <Button variant="primary" type="submit" className={styles.submitButton}>
+          <Button
+            variant="primary"
+            type="submit"
+            className={styles.submitButton}
+          >
             Sign In
           </Button>
         </Form>
@@ -101,7 +104,7 @@ function SignInForm() {
         <div className={styles.divider}>or</div>
 
         <p className={styles.signUpText}>
-          Don&apos;t have an account?{' '}
+          Don&apos;t have an account?{" "}
           <Link to="/sign-up" className={styles.link}>
             Sign up here!
           </Link>
