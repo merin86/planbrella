@@ -202,6 +202,16 @@ Below is a list of components that has been separated into their own files to be
 
 ## Design
 
+### Colour Scheme
+
+- [Color Picker](https://imagecolorpicker.com/) was used to ensure the same colour shades were used throughout the website.
+
+- The color theme of the website is blue, with different shades. It gives a clean and pleasant impression and represents the simplicity that the page wants to convey. These two colours have been used:
+
+![Lightblue](documentation/images/lightblue.jpg)
+
+![Blue](documentation/images/blue.jpg)
+
 ### Typography
 
 The website uses font-family: 'Montserrat'. A trendy and elegant style with a distinct character.
@@ -243,6 +253,18 @@ To test the code in the Front-End, the Eslint extension has been installed in Gi
 <summary>Eslint</summary>
 <img src="documentation/images/eslint.jpg">
 </details>
+
+### Lighthouse
+
+The website gives a good response from Lighthouse in Google Chrome on all pages. Here's an example from the Tasks page that matches the other pages' results as well:
+
+Desktop:
+
+![Lighthouse Desktop](documentation/images/lighthouse-desktop.jpg)
+
+Mobile:
+
+![Lighthouse Mobile](documentation/images/lighthouse-mobile.jpg)
 
 ### Manual Testing
 
