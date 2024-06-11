@@ -134,7 +134,53 @@ I tried various ways to fix this, but in the end had to take the help of a tutor
 
 ## Features
 
+### Home Page
+
+This is the front page where the user ends up first when entering the website:
+
+![Home Page](documentation/images/home-page.jpg)
+
+### Sign Up
+
+Here the user can create an account:
+
+![Sign Up](documentation/images/sign-up-page.jpg)
+
+### Sign In
+
+Here the user can sign in:
+
+![Sign In](documentation/images/sign-in-page.jpg)
+
+### Tasks
+
+Here the user can see a list of their tasks, create a new task, navigate to task detail (view), edit a task and delete a task:
+
+![Tasks](documentation/images/tasks-page.jpg)
+
+### Task Detail
+
+Here the user can see the details of their created task, edit task, delete task as well as read, write, update and delete comments in the specific task:
+
+![Task Detail](documentation/images/task-detail-page.jpg)
+
+### Task Edit
+
+Task Edit View:
+
+![Task Edit](documentation/images/task-edit-page.jpg)
+
 ### Future Features
+
+Some of the features I planned for when I started the project have been excluded. This is because much of the time was spent getting other parts to work. For the future, these features could be implemented and make the page more interesting:
+
+- Priority: To organize tasks according to low, medium or high priority.
+- Category: To be able to categorize different tasks such as personal or work-related.
+- Status: Users can mark a task as Open, In Progress or Done.
+- Enables attaching files to tasks.
+- Enables assignment and deassignment of task owners.
+- Implement task filtering function: The user can filter tasks based on due date, priority, category and status.
+- Calendar: Integrate calendar function to sync with tasks.
 
 ## Reusable Components
 
@@ -234,12 +280,15 @@ To test the code in the Front-End, the Eslint extension has been installed in Gi
 
 ## Bugs
 
-- When pressing the Edit button to update a Task, the date was backdated by one day. To solve this, this code was used:
+When pressing the Edit button to update a Task, the date was backdated by one day. To solve this, this code was used:
 
 <details>
 <summary>dueDate</summary>
 <img src="documentation/images/edit-task-date.jpg">
 </details>
+
+
+My token handling doesn't seem to be working correctly. I have tried to troubleshoot this in various ways and talked to the tutor. However, it has not been possible to solve it for me. I don't know how to do it. This means that the website stops responding after about 5 minutes and you have to do a refresh. I realize this is a serious problem that might result in a failing grade, but I have not been able to resolve it.
 
 ---
 
@@ -346,6 +395,57 @@ The project was developed following Agile principles, with the Project Board and
 This instruction video was used to help create the Kanban Board: [Agile Guide](https://www.youtube.com/watch?v=U_dMihBgUNY)
 
 ## Deployment
+
+### Creating the Workspace
+
+- Create a new repository using the provided template.
+- Open the repository in GitPod.
+
+### Setting Up the Backend
+
+- Install Django: pip3 install 'django<4'
+- Create Django project: django-admin startproject.
+- Create and configure env.py.
+
+### Setting Up the Frontend
+
+- Create frontend directory: mkdir frontend
+- Change to frontend directory: cd frontend
+- Create React app: npx create-react-app . --template git+https://github.com/Code-Institute-Org/cra-template-moments.git --use-npm
+- Remove redundant files: rm -rf .git .gitignore README.md
+- Start the app: npm start
+- Add local links to env.py for both backend and frontend.
+- Configure CORS and proxy settings in settings.py and package.json.
+
+### Creating Heroku App and SQL Database
+
+- Install Gunicorn: pip3 install 'django<4' gunicorn
+- Install additional libraries: pip3 install dj_database_url==0.5.0 psycopg2
+- Create requirements.txt: pip3 freeze --local > requirements.txt
+- Create a New Application in Heroku.
+- Set up ElephantSQL and Heroku with necessary configuration variables.
+
+### Deploying the Project
+
+- Install Whitenoise: pip3 install whitenoise==6.4.0
+- Update requirements.txt: pip3 freeze > requirements.txt
+- Create staticfiles directory: mkdir staticfiles
+- Configure Whitenoise in settings.py.
+- Update URL patterns in urls.py.
+- Create Procfile for deployment.
+- Compile static files: python3 manage.py collectstatic
+- Build frontend assets: npm run build && mv build ../staticfiles/.
+- Add runtime environment: runtime.txt
+
+### Connecting to GitHub Pages
+
+- Set GitHub Pages source to the main branch.
+- Deploy.
+
+### Forking and Cloning
+
+- Click the "Fork" button at the top right of the page. This button creates a copy of the repository in your own GitHub account.
+- After you make your fork, you can clone it to your local computer to start working with it. You do this by opening the terminal and typing the following command: "git clone https://github.com/your-username/repository-name.git"
 
 ## Credits
 

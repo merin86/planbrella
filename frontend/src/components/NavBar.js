@@ -6,6 +6,7 @@ import logo from "../assets/logo.jpg";
 import styles from "../styles/NavBar.module.css";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
 
+// eslint-disable-next-line react/prop-types
 const NavBar = ({ onToggle }) => {
   // State to track if the navbar is expanded
   const [expanded, setExpanded] = useState(false);
