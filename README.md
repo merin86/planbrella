@@ -87,6 +87,20 @@ The User Model is included in the Django Rest Framework's dj-rest-auth library. 
 
 The automated testing is not comprehensive, but it gives an indication of the developer's ability to create automated tests.
 
+### Manual Testing
+
+The manual testing is performed by navigating to the deployed site and appending "/api/" followed by the desired endpoint to view the data. When the project was solely Back-End, all functionalities of the DRF view, including modifying field contents, were tested and worked as expected. After integrating the Front-End and Back-End, access to information is now available exclusively in JSON format. Consequently, changes to the content are now made through the Front-End or the Admin section instead. See the pictures below:
+
+<details>
+<summary>api/profiles</summary>
+<img src="documentation/images/api-profiles-view.jpg">
+</details>
+
+<details>
+<summary>Admin</summary>
+<img src="documentation/images/admin-view.jpg">
+</details>
+
 ### Python Testing
 
 To test that the Python code meets the PEP8 standard, [CI Python Linter](https://pep8ci.herokuapp.com/) was used.
@@ -184,6 +198,40 @@ To test the code in the Front-End, the Eslint extension has been installed in Gi
 <img src="documentation/images/eslint.jpg">
 </details>
 
+### Manual Testing
+
+#### Unauthenticated User
+
+| **Feature** | **Action** | **Expected result** | **Pass/Fail** |
+|-------------|------------|---------------------|-------------------|
+| Navbar | Home, Sign In and Sign Up buttons are visible. | Home, Sign In and Sign Up buttons are visible. | :heavy_check_mark: |
+| Sign In link | Press the Sign In link. | Enter Sign In page. | :heavy_check_mark: |
+| Sign Up link | Press the Sign Up link. | Enter Sign Up page. | :heavy_check_mark: |
+| Signing Up | Create Account. | Account is created. | :heavy_check_mark: |
+| Signing In | Sign In with created account. | User is signed in. | :heavy_check_mark: |
+
+#### Authenticated User
+
+| **Feature** | **Action** | **Expected result** | **Pass/Fail** |
+|-------------|------------|---------------------|-------------------|
+| Navbar | Home, Tasks and Sign Out buttons are visible plus Username. | Home, Tasks and Sign Out buttons are visible plus Username. | :heavy_check_mark: |
+| Tasks link | Press the Tasks link. | Enter the Tasks page. | :heavy_check_mark: |
+| Create Task | Press the Create Task button. | Enter Create Task form. | :heavy_check_mark: |
+| Create Task | Create Task. | Task is created. | :heavy_check_mark: |
+| View Task | Press the View Task button. | Enter the View Task page. | :heavy_check_mark: |
+| Edit Task | Press the Edit Task button. | Enter the Edit Task page. | :heavy_check_mark: |
+| Edit Task | Change content and save. | Task is changed and saved. | :heavy_check_mark: |
+| Edit Task | Cancel Edit. | Redirected to tasks page. | :heavy_check_mark: |
+| Delete Task | Press Delete button. | Task is deleted after confirming. | :heavy_check_mark: |
+| Comment | Write comment and press Post button. | Comment is posted. | :heavy_check_mark: |
+| Edit Comment | Press Edit button, write and press Save. | Comment is updated. | :heavy_check_mark: |
+| Cancel Edit Comment | Press Cancel button in edit mode. | Edit mode is turned off. | :heavy_check_mark: |
+| Delete Comment | Press Delete button. | Comment is deleted after confirming. | :heavy_check_mark: |
+| Overdue marking | Overdue marking is visible. | Overdue marking is visible. | :heavy_check_mark: |
+| Infinite scrolling | Scroll to the bottom of the page. | More comments are loaded, if more exists. | :heavy_check_mark: |
+| Sign Out | Press Sihn Out button. | User is signed out. | :heavy_check_mark: |
+
+
 ## Bugs
 
 - When pressing the Edit button to update a Task, the date was backdated by one day. To solve this, this code was used:
@@ -205,7 +253,7 @@ All issues are in GitHub within the [Planbrella](https://github.com/users/merin8
 
 [Milestones](https://github.com/merin86/planbrella/milestones) were linked to the project.
 
-The Kanban board was instrumental in tracking progress and managing tasks throughout this project. It facilitated planning and the addition of new features, ensuring that all tasks were organized and easily accessible. An additional section was created in the Kanban board with the heading "Wont Have". These features became overwhelming for this project and have therefore been placed under [Future Features](#future-features).
+The Kanban board was instrumental in tracking progress and managing tasks throughout this project. It facilitated planning and the addition of new features, ensuring that all tasks were organized and easily accessible. An additional section was created in the Kanban board with the heading "Wont Have". These features became overwhelming for this project and have therefore been placed under [Future Features](#future-features)
 
 | **EPIC** | **ID #** | **User Story** | **Label** |
 |-------------|------------|---------------------|---------------------|
