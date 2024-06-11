@@ -4,6 +4,7 @@ import axios from "axios";
 import { FaCheck } from 'react-icons/fa';
 import { Modal, Button } from 'react-bootstrap';
 import styles from "../../styles/Tasks.module.css";
+import { axiosReq, axiosRes } from "../../api/axiosDefaults";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]); // State to hold the list of tasks
@@ -14,7 +15,7 @@ const Tasks = () => {
     // Function to fetch tasks from the server
     const fetchTasks = async () => {
       try {
-        const { data } = await axios.get("/tasks/");
+        const { data } = await axiosRes.get("/tasks/");
         // Sort tasks by due date
         const sortedTasks = data.sort(
           (a, b) => new Date(a.due_date) - new Date(b.due_date)
