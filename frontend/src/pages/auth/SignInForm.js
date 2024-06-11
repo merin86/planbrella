@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Form, Button, Container, Alert } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import PropTypes from 'prop-types';
 import styles from '../../styles/SignInUpForm.module.css';
 import { useSetCurrentUser } from "../../contexts/CurrentUserContext";
 
@@ -36,6 +35,7 @@ function SignInForm() {
     try {
       // Send sign in request
       const { data } = await axios.post('/dj-rest-auth/login/', signInData);
+      console.log("data in sign in", data)
       localStorage.setItem('token', data.key);
 
       // Fetch current user data
@@ -110,10 +110,5 @@ function SignInForm() {
     </div>
   );
 }
-
-// Define prop types for the SignInForm component
-SignInForm.propTypes = {
-  setCurrentUser: PropTypes.func.isRequired,
-};
 
 export default SignInForm;

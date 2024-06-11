@@ -5,7 +5,6 @@ import axios from "axios";
 import logo from "../assets/logo.jpg";
 import styles from "../styles/NavBar.module.css";
 import { useCurrentUser, useSetCurrentUser } from "../contexts/CurrentUserContext";
-import PropTypes from 'prop-types';
 
 const NavBar = ({ onToggle }) => {
   // State to track if the navbar is expanded
@@ -105,11 +104,6 @@ const NavBar = ({ onToggle }) => {
       </Container>
     </Navbar>
   );
-};
-
-// Define prop types for the NavBar component
-NavBar.propTypes = {
-  onToggle: PropTypes.func.isRequired,
 };
 
 export default NavBar;

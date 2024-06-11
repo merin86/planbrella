@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import axios from "axios";
 import styles from "../../styles/CommentCreateForm.module.css";
 
@@ -58,12 +57,6 @@ const CommentCreateForm = ({ taskId, onCommentAdded }) => {
       </form>
     </div>
   );
-};
-
-// Prop types for the component
-CommentCreateForm.propTypes = {
-  taskId: PropTypes.number.isRequired, // The ID of the task to which the comment is added
-  onCommentAdded: PropTypes.func.isRequired, // Callback function to handle adding a new comment
 };
 
 export default CommentCreateForm;

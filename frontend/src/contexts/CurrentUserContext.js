@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useMemo, useState } from "react";
-import PropTypes from "prop-types";
 import axios from "axios";
 import { axiosReq, axiosRes } from "../api/axiosDefaults";
 import { useNavigate } from "react-router-dom";
@@ -81,9 +80,4 @@ export const CurrentUserProvider = ({ children }) => {
       </SetCurrentUserContext.Provider>
     </CurrentUserContext.Provider>
   );
-};
-
-// Define prop types for the CurrentUserProvider component
-CurrentUserProvider.propTypes = {
-  children: PropTypes.node.isRequired,
 };
