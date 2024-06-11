@@ -8,6 +8,26 @@ The primary goal of this project was to develop an intuitive and user-friendly a
 
 ## Content Index
 
+* [Planing Stage](#planing-stage)
+    - [Wireframes](#wireframes)
+    - [Database Plan](#database-plan)
+* [Back-End](#back-end)
+    - [Testing](#testing)
+    - [Bugs](#bugs)
+* [Fron-End](#front-end)
+    - [Features](#features)
+    - [Reusable Components](#reusable-components)
+    - [Design](#design)
+    - [Testing](#testing-1)
+    - [Bugs](#bugs-1)
+* [Overall](#overall)
+    - [User Experience (UX)](#user-experience-ux)
+    - [Technologies Used](#technologies-used)
+    - [Agile](#agile)
+    - [Deployment](#deployment)
+    - [Credits](#credits)
+    - [Acknowledgment](#acknowledgment)
+
 ---
 
 # Planing Stage
