@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
@@ -20,6 +20,20 @@ const TaskDetail = () => {
   const [editError, setEditError] = useState("");
   const [showTaskDeleteModal, setShowTaskDeleteModal] = useState(false);
 
+  // Fetch comments for the task
+  const fetchComments = useCallback(async () => {
+    try {
+      const { data } = await axios.get(`/comments/?task=${id}&page=${page}`);
+      setComments((prevComments) => [...prevComments, ...data.results]);
+      if (!data.next) {
+        setHasMore(false);
+      }
+      setPage((prevPage) => prevPage + 1);
+    } catch (err) {
+      console.error("Error fetching comments:", err);
+    }
+  }, [id, page]);
+
   // Fetch task details on component mount
   useEffect(() => {
     const fetchTask = async () => {
@@ -33,21 +47,7 @@ const TaskDetail = () => {
 
     fetchTask();
     fetchComments();
-  }, [id]);
-
-  // Fetch comments for the task
-  const fetchComments = async () => {
-    try {
-      const { data } = await axios.get(`/comments/?task=${id}&page=${page}`);
-      setComments((prevComments) => [...prevComments, ...data.results]);
-      if (!data.next) {
-        setHasMore(false);
-      }
-      setPage((prevPage) => prevPage + 1);
-    } catch (err) {
-      console.error("Error fetching comments:", err);
-    }
-  };
+  }, [id, fetchComments]);
 
   // Navigate to the task edit page
   const handleEdit = () => {

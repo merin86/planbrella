@@ -329,9 +329,6 @@ Mobile:
 <img src="documentation/images/edit-task-date.jpg">
 </details>
 
-
-- My token handling doesn't seem to be working correctly. I have tried to troubleshoot this in various ways and talked to a tutor. However, it has not been possible to solve it for me. I don't know how to do it. This means that the website stops responding after about five minutes and you have to do a refresh. I realize this is a serious problem that might result in a failing grade, but I have not been able to resolve it.
-
 ---
 
 # Overall
