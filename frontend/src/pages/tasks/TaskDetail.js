@@ -32,6 +32,7 @@ const TaskDetail = () => {
     };
 
     fetchTask();
+    fetchComments();
   }, [id]);
 
   // Fetch comments for the task

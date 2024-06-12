@@ -4,7 +4,7 @@ import axios from "axios";
 import { FaCheck } from 'react-icons/fa';
 import { Modal, Button } from 'react-bootstrap';
 import styles from "../../styles/Tasks.module.css";
-import { axiosReq, axiosRes } from "../../api/axiosDefaults";
+import { axiosRes } from "../../api/axiosDefaults";
 
 const Tasks = () => {
   const [tasks, setTasks] = useState([]); // State to hold the list of tasks
