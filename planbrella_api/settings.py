@@ -62,6 +62,7 @@ DEBUG = 'DEBUG' in os.environ
 
 ALLOWED_HOSTS = [
     '.gitpod.io',
+    '.codeinstitute-ide.net',
     '.herokuapp.com',
     '127.0.0.1',
     'localhost',
@@ -70,7 +71,7 @@ ALLOWED_HOSTS = [
 
 
 # CSRF settings
-CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.gitpod.io', 'http://localhost:8000']
+CSRF_TRUSTED_ORIGINS = ['https://*.herokuapp.com', 'https://*.gitpod.io', 'http://localhost:8000', 'https://*.codeinstitute-ide.net']
 
 
 # Application definition
