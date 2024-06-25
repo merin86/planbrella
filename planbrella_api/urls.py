@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/profiles/', include('profiles.urls')),
     path('api/tasks/', include('tasks.urls')),
     path('api/comments/', include('comments.urls')),
+    path('api/groups/', include('groups.urls')),
 ]
 
 handler404 = TemplateView.as_view(template_name='index.html')

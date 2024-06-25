@@ -6,6 +6,7 @@ from .models import Group
 from .serializers import GroupSerializer
 from planbrella_api.permissions import IsOwnerOrReadOnly
 
+
 class GroupList(APIView):
     serializer_class = GroupSerializer
     permission_classes = [permissions.IsAuthenticated]

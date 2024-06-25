@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from tasks.models import Task
 
+
 class Group(models.Model):
     """
     Represents a group associated with a task in the system.
