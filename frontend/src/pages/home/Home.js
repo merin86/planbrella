@@ -26,6 +26,12 @@ const Home = () => {
               Tasks page
             </NavLink>
             .
+            <br />
+            You can also manage your groups by visiting the{" "}
+            <NavLink to="/groups" className={styles.Link}>
+              Groups page
+            </NavLink>
+            .
           </p>
         ) : (
           <p>
