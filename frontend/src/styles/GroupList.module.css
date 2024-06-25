@@ -1,0 +1,103 @@
+/* Styles for the Groups page */
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .TextBox {
+    flex: 1;
+    max-width: 80%;
+    background-color: lightblue;
+    border: 10px solid rgba(55, 130, 255, 255);
+    box-shadow: 0 0 0 1px #000, 0 0 0 1px inset #000;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  /* Styles for the scrollable content within the text box */
+  .ScrollableContent {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+  
+  .HeaderRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #000;
+    padding: 10px 0;
+    font-weight: bold;
+  }
+  
+  .GroupItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #000;
+    padding: 10px 0;
+  }
+  
+  .HeaderRow>div,
+  .GroupItem>div {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .CreateButton {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+  }
+  
+  .CreateButton .btn {
+    text-decoration: none;
+  }
+  
+  .CreateButton .btn:hover {
+    text-decoration: none;
+  }
+  
+  /* Media query for small screens */
+  @media (max-width: 767px) {
+    .Container {
+      padding: 0;
+    }
+  
+    .TextBox {
+      overflow-x: auto;
+      max-width: 100%;
+      padding: 10px;
+    }
+  
+    .HeaderRow,
+    .GroupItem {
+      min-width: 600px;
+      flex-wrap: wrap;
+    }
+  
+    .HeaderRow div,
+    .GroupItem div {
+      font-size: 0.8rem;
+      flex: 0 0 20%;
+      text-align: center;
+    }
+  
+    .HeaderRow div {
+      white-space: normal;
+    }
+  
+    .GroupItem div {
+      white-space: normal;
+    }
+  
+    .GroupButton {
+      font-size: 0.8rem;
+    }
+  }
+  

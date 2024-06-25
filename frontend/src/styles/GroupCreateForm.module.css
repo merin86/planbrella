@@ -1,0 +1,64 @@
+/* Styles for the Group Create Form */
+.Container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .TextBox {
+    display: inline-block;
+    max-width: 80%;
+    background-color: lightblue;
+    border: 10px solid rgba(55, 130, 255, 255);
+    box-shadow: 0 0 0 1px #000, 0 0 0 1px inset #000;
+    padding: 20px;
+    box-sizing: border-box;
+  }
+  
+  .Form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .FormGroup {
+    margin-bottom: 20px;
+  }
+  
+  .Input,
+  .Textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  .ButtonGroup {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .Button {
+    margin-left: 10px;
+    text-decoration: none;
+  }
+  
+  .Button:hover {
+    text-decoration: none;
+  }
+  
+  /* Media query for small screens */
+  @media (max-width: 767px) {
+    .Container {
+      padding: 0;
+    }
+  
+    .TextBox {
+      max-width: 100%;
+      padding: 10px;
+    }
+  }
+  

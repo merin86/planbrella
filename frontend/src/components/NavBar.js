@@ -52,6 +52,13 @@ const NavBar = ({ onToggle }) => {
       >
         Tasks
       </NavLink>
+      <NavLink
+        className={({ isActive }) => isActive ? styles.NavLinkActive : styles.NavLink}
+        to="/groups"
+        onClick={handleClose}
+      >
+        Groups
+      </NavLink>
       <span className={styles.NavLink} onClick={handleSignOut}>
         Sign Out
       </span>
