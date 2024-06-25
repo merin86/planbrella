@@ -7,7 +7,6 @@ import styles from "../../styles/GroupEdit.module.css";
 const GroupEdit = () => {
   const { id } = useParams(); // Retrieve group ID from URL parameters
   const navigate = useNavigate();
-  const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [groupSize, setGroupSize] = useState("");
   const [task, setTask] = useState("");
@@ -19,7 +18,6 @@ const GroupEdit = () => {
     const fetchGroup = async () => {
       try {
         const { data } = await axios.get(`/groups/${id}/`);
-        setTitle(data.title);
         setDescription(data.description);
         setGroupSize(data.group_size);
         setTask(data.task);
@@ -53,8 +51,6 @@ const GroupEdit = () => {
 
     // Validate form fields
     const newErrors = {};
-    if (!title.trim())
-      newErrors.title = "Title is required and cannot be blank.";
     if (!description.trim())
       newErrors.description = "Description is required and cannot be blank.";
     if (!groupSize || groupSize <= 0)
@@ -69,7 +65,6 @@ const GroupEdit = () => {
 
     try {
       const updatedGroup = {
-        title,
         description,
         group_size: groupSize,
         task,
@@ -92,45 +87,7 @@ const GroupEdit = () => {
   return (
     <div className={styles.Container}>
       <div className={styles.TextBox}>
-        <h2>Edit Group</h2>
         <form onSubmit={handleSave} className={styles.Form}>
-          <div className={styles.FormGroup}>
-            <label htmlFor="title">Title:</label>
-            <input
-              type="text"
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              required
-              className={styles.Input}
-            />
-            {errors.title && <Alert variant="danger">{errors.title}</Alert>}
-          </div>
-          <div className={styles.FormGroup}>
-            <label htmlFor="description">Description:</label>
-            <textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              required
-              className={styles.Textarea}
-            />
-            {errors.description && (
-              <Alert variant="danger">{errors.description}</Alert>
-            )}
-          </div>
-          <div className={styles.FormGroup}>
-            <label htmlFor="groupSize">Group Size:</label>
-            <input
-              type="number"
-              id="groupSize"
-              value={groupSize}
-              onChange={(e) => setGroupSize(e.target.value)}
-              required
-              className={styles.Input}
-            />
-            {errors.groupSize && <Alert variant="danger">{errors.groupSize}</Alert>}
-          </div>
           <div className={styles.FormGroup}>
             <label htmlFor="task">Task:</label>
             <select
@@ -148,6 +105,31 @@ const GroupEdit = () => {
               ))}
             </select>
             {errors.task && <Alert variant="danger">{errors.task}</Alert>}
+          </div>
+          <div className={styles.FormGroup}>
+            <label htmlFor="groupSize">Group Size:</label>
+            <input
+              type="number"
+              id="groupSize"
+              value={groupSize}
+              onChange={(e) => setGroupSize(e.target.value)}
+              required
+              className={styles.Input}
+            />
+            {errors.groupSize && <Alert variant="danger">{errors.groupSize}</Alert>}
+          </div>
+          <div className={styles.FormGroup}>
+            <label htmlFor="description">Description:</label>
+            <textarea
+              id="description"
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
+              required
+              className={styles.Textarea}
+            />
+            {errors.description && (
+              <Alert variant="danger">{errors.description}</Alert>
+            )}
           </div>
           <div className={styles.ButtonGroup}>
             <button

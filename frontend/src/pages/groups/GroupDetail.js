@@ -8,7 +8,8 @@ const GroupDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const [group, setGroup] = useState(null);
-  const [showGroupDeleteModal, setShowGroupDeleteModal] = useState(false);
+  const [taskTitle, setTaskTitle] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   // Fetch group details on component mount
   useEffect(() => {
@@ -16,6 +17,10 @@ const GroupDetail = () => {
       try {
         const { data } = await axios.get(`/groups/${id}/`);
         setGroup(data);
+        
+        // Fetch the task title
+        const taskRes = await axios.get(`/tasks/${data.task}/`);
+        setTaskTitle(taskRes.data.title);
       } catch (err) {
         console.error("Error fetching group:", err);
       }
@@ -24,19 +29,14 @@ const GroupDetail = () => {
     fetchGroup();
   }, [id]);
 
-  // Navigate to the group edit page
-  const handleEdit = () => {
-    navigate(`/groups/${id}/edit`);
-  };
-
   // Open the group delete confirmation modal
-  const openGroupDeleteModal = () => {
-    setShowGroupDeleteModal(true);
+  const openDeleteModal = () => {
+    setShowDeleteModal(true);
   };
 
   // Close the group delete confirmation modal
-  const closeGroupDeleteModal = () => {
-    setShowGroupDeleteModal(false);
+  const closeDeleteModal = () => {
+    setShowDeleteModal(false);
   };
 
   // Handle group deletion
@@ -49,35 +49,45 @@ const GroupDetail = () => {
     }
   };
 
+  // Navigate to the group edit page
+  const handleEdit = () => {
+    navigate(`/groups/${id}/edit`);
+  };
+
   return (
     <div className={styles.Container}>
       <div className={styles.TextBox}>
-        <div className={styles.Title}>{group?.name}</div>
-        <div className={styles.Description}>{group?.description}</div>
-        <hr className={styles.Divider} />
-        <div className={styles.GroupSize}>
-          Group Size: {group?.size}
-        </div>
-        <div className={styles.TaskLink}>
-          Task: {group?.task.title}
-        </div>
-        <div className={styles.ButtonsContainer}>
-          <button
-            onClick={handleEdit}
-            className={`btn btn-warning ${styles.Button}`}
-          >
-            Edit
-          </button>
-          <button
-            onClick={openGroupDeleteModal}
-            className={`btn btn-danger ${styles.Button}`}
-          >
-            Delete
-          </button>
-        </div>
+        {group && (
+          <>
+            <div className={styles.TaskTitle}>
+              Task: {taskTitle}
+            </div>
+            <hr className={styles.Divider} />
+            <div className={styles.GroupSize}>
+              Group Size: {group.group_size}
+            </div>
+            <div className={styles.Description}>
+              Description: {group.description}
+            </div>
+            <div className={styles.ButtonsContainer}>
+              <button
+                onClick={handleEdit}
+                className={`btn btn-warning ${styles.Button}`}
+              >
+                Edit
+              </button>
+              <button
+                onClick={openDeleteModal}
+                className={`btn btn-danger ${styles.Button}`}
+              >
+                Delete
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
-      <Modal show={showGroupDeleteModal} onHide={closeGroupDeleteModal}>
+      <Modal show={showDeleteModal} onHide={closeDeleteModal}>
         <Modal.Header closeButton>
           <Modal.Title>Confirm Delete</Modal.Title>
         </Modal.Header>
@@ -85,7 +95,7 @@ const GroupDetail = () => {
           Are you sure you want to delete this group? Removing a group is permanent.
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={closeGroupDeleteModal}>
+          <Button variant="secondary" onClick={closeDeleteModal}>
             Cancel
           </Button>
           <Button variant="danger" onClick={handleGroupDelete}>

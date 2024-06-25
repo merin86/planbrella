@@ -15,7 +15,13 @@ const GroupList = () => {
     const fetchGroups = async () => {
       try {
         const { data } = await axiosRes.get("/groups/");
-        setGroups(data);  // Update state with the fetched groups
+        const groupsWithTasks = await Promise.all(
+          data.map(async (group) => {
+            const taskRes = await axiosRes.get(`/tasks/${group.task}/`);
+            return { ...group, taskTitle: taskRes.data.title };
+          })
+        );
+        setGroups(groupsWithTasks);  // Update state with the fetched groups
       } catch (err) {
         console.error(err);
       }
@@ -54,7 +60,6 @@ const GroupList = () => {
           <div className={styles.HeaderRow}>
             <div>Task</div>
             <div>Group Size</div>
-            <div>Description</div>
             <div>View Group</div>
             <div>Edit Group</div>
             <div>Delete Group</div>
@@ -62,9 +67,8 @@ const GroupList = () => {
           {groups.length > 0 ? (
             groups.map((group) => (
               <div key={group.id} className={styles.GroupItem}>
-                <div>{group.task.title}</div>
+                <div>{group.taskTitle}</div>
                 <div>{group.group_size}</div>
-                <div>{group.description}</div>
                 <div>
                   <Link
                     to={`/groups/${group.id}`}
