@@ -9,7 +9,7 @@ import Tasks from "./pages/tasks/Tasks";
 import TaskCreateForm from "./pages/tasks/TaskCreateForm";
 import TaskDetail from "./pages/tasks/TaskDetail";
 import TaskEdit from "./pages/tasks/TaskEdit";
-import Groups from "./pages/groups/Groups";
+import GroupList from "./pages/groups/GroupList";
 import GroupCreateForm from "./pages/groups/GroupCreateForm";
 import GroupDetail from "./pages/groups/GroupDetail";
 import GroupEdit from "./pages/groups/GroupEdit";
@@ -35,7 +35,7 @@ function App() {
           <Route path="/tasks/create" element={<TaskCreateForm />} /> {/* Task creation form route */}
           <Route path="/tasks/:id" element={<TaskDetail />} /> {/* Task detail view route */}
           <Route path="/tasks/:id/edit" element={<TaskEdit />} /> {/* Task edit form route */}
-          <Route path="/groups" element={<Groups />} /> {/* Groups list route */}
+          <Route path="/groups" element={<GroupList />} /> {/* Groups list route */}
           <Route path="/groups/create" element={<GroupCreateForm />} /> {/* Group creation form route */}
           <Route path="/groups/:id" element={<GroupDetail />} /> {/* Group detail view route */}
           <Route path="/groups/:id/edit" element={<GroupEdit />} /> {/* Group edit form route */}

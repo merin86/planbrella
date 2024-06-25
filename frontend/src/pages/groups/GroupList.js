@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import axios from "axios";
 import { Modal, Button } from 'react-bootstrap';
-import styles from "../../styles/Groups.module.css";  // Create a corresponding CSS file
+import styles from "../../styles/GroupList.module.css";
 import { axiosRes } from "../../api/axiosDefaults";
 
 const GroupList = () => {
