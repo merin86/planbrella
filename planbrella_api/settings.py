@@ -94,6 +94,7 @@ INSTALLED_APPS = [
     'corsheaders',
     
     'comments',
+    'groups',
     'profiles',
     'tasks',
 ]
