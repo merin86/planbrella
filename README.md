@@ -2,7 +2,7 @@
 
 [The actual website](https://planbrella-ad4018061f52.herokuapp.com/)
 
-The primary goal of this project was to develop an intuitive and user-friendly application that enables users to plan and organize their work efficiently. The app aims to provide a structured approach to task management, ensuring users can easily create, track, and manage their tasks.
+The primary goal of this project was to develop an intuitive and user-friendly application that enables users to plan and organize their work efficiently. The app aims to provide a structured approach to task and group management, ensuring users can easily create, track, and manage their tasks and groups.
 
 ![Mockup](documentation/images/mockup.jpg)
 
@@ -65,7 +65,6 @@ The User Model is included in the Django Rest Framework's dj-rest-auth library. 
     - create_user_profile: Creates a profile for each new user upon user creation.
     - save_user_profile: Saves the profile associated with the user when the user is saved.
 
-
 ### Tasks Model
 
 | **Name** | **Field Type** | **Validation** |
@@ -94,6 +93,20 @@ The User Model is included in the Django Rest Framework's dj-rest-auth library. 
 - owner/task:
     - ForeignKey
 
+### Groups Model
+
+| **Name** | **Field Type** | **Validation** |
+|-------------|------------|---------------------|
+| task | ForeignKey | related_name='groups', on_delete=models.CASCADE | 
+| owner | ForeignKey | related_name='owned_groups', on_delete=models.CASCADE |
+| group_size | IntegerField | validators=[MinValueValidator(1)] |
+| description | TextField | blank=True, null=True |
+| created_at | DateTimeField | auto_now_add=True, editable=False |
+| updated_at | DateTimeField | auto_now=True |
+
+### Extra information due to late addition
+
+In my last mentoring conversation, my mentor drew my attention to the fact that I only had one custom model in my project. I had previously thought that my comments model was counted as my second, but it was explained to me that this model was too similar to the model featured in CI's walkthrough (Moments). I thus had to cancel my ambition to submit the project and begin the creation of the "Groups" app. This is now added and should now count as my second custom model. As this addition was made afterwards, this function was not included in the planning from the start, but is an after-construction. However, I have added it to my Kanban Board, as well as added some information to my README. However, there are parts in my README where this function is not represented, as it was not included in the planning from the start. I hope this is acceptable.
 
 ---
 
@@ -189,6 +202,24 @@ Here the user can see the details of their created task, edit task, delete task 
 Task Edit View:
 
 ![Task Edit](documentation/images/task-edit-page.jpg)
+
+### Groups
+
+Here the user can see a list of their groups, create a new groups, navigate to group detail (view), edit a group and delete a group:
+
+![Groups](documentation/images/groups-page.jpg)
+
+### Group Detail
+
+Here the user can see the details of their created group, edit group and delete group:
+
+![Group Detail](documentation/images/group-detail-page.jpg)
+
+### Group Edit
+
+Group Edit View:
+
+![Task Edit](documentation/images/group-edit-page.jpg)
 
 ### Future Features
 
@@ -315,6 +346,13 @@ Mobile:
 | Edit Comment | Press Edit button, write and press Save. | Comment is updated. | :heavy_check_mark: |
 | Cancel Edit Comment | Press Cancel button in edit mode. | Edit mode is turned off. | :heavy_check_mark: |
 | Delete Comment | Press Delete button. | Comment is deleted after confirming. | :heavy_check_mark: |
+| Create Group | Press the Create Group button. | Enter Create Group form. | :heavy_check_mark: |
+| Create Group | Create Group. | Group is created. | :heavy_check_mark: |
+| View Group | Press the View Group button. | Enter the View Group page. | :heavy_check_mark: |
+| Edit Group | Press the Group Task button. | Enter the Edit Group page. | :heavy_check_mark: |
+| Edit Group | Change content and save. | Group is changed and saved. | :heavy_check_mark: |
+| Edit Group | Cancel Edit. | Redirected to groups page. | :heavy_check_mark: |
+| Delete Group | Press Delete button. | Group is deleted after confirming. | :heavy_check_mark: |
 | Overdue marking | Overdue marking is visible. | Overdue marking is visible. | :heavy_check_mark: |
 | Infinite scrolling | Scroll to the bottom of the page. | More comments are loaded, if more exists. | :heavy_check_mark: |
 | Sign Out | Press Sihn Out button. | User is signed out. | :heavy_check_mark: |
@@ -353,6 +391,8 @@ The Kanban board was instrumental in tracking progress and managing tasks throug
 |  | 5 | As a logged in user I want the system to automatically identify and mark tasks as overdue so that I can immediately see which tasks need immediate attention | Could Have |
  | **Comment Management** | 
 |  | 11 | As a logged in user I can post comments on tasks so that I can engage in discussions about task details and progress with other team members | Must Have |
+| **Group Management Feature** | 
+|  | 12 | As a user I can create, view, edit, and delete groups so that I can efficiently manage groups associated with tasks. | Must Have |
 
 ### Flow Diagram
 
@@ -526,6 +566,13 @@ This instruction video was used to help create the Kanban Board: [Agile Guide](h
 
 ## Acknowledgment
 
+- I would like to thank my mentor, Jubril Akolade, for all the help he has given me.
+
 - I want to thank the tutor (Roman) who helped me fix the "bug" that caused problems when I tried to open my APIView via Heroku.
 
 - I also want to thank the tutor (Thomas) who helped me when I was deploying the unified application to Heroku.
+
+For help with manual testing:
+
+- Annika Magnusson
+- Cecilia Magnusson
